@@ -1,2 +1,2 @@
-# feedbox
+# feed Box
 Feed Reader App
