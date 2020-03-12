@@ -1,4 +1,4 @@
-# feed_box
+# Feed Box
 
 A new Flutter project.
 
