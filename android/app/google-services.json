@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "731312071052",
+    "firebase_url": "https://feed-box-c1336.firebaseio.com",
+    "project_id": "feed-box-c1336",
+    "storage_bucket": "feed-box-c1336.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731312071052:android:e15925b1e9629a9eeeb6a9",
+        "android_client_info": {
+          "package_name": "com.example.feed_box"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731312071052-op76qdn5ono0j6bg7je9hhm20ar59grn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMEm2dwSKwOmGuxSnM1si5_tpqLfx0g1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731312071052-op76qdn5ono0j6bg7je9hhm20ar59grn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
