@@ -15,7 +15,7 @@ class SearchTile extends StatelessWidget {
             backgroundColor: Colors.blueGrey,
           ),
           title: Text('${profile.fullname}',style: TextStyle(fontWeight: FontWeight.bold)),
-          subtitle: Text('@${profile.fullname}'),
+          subtitle: Text('@${profile.email}'),
         ),
       ),
     );
