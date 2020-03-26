@@ -72,7 +72,7 @@ class _SignInState extends State<SignIn> {
                           Expanded(
                             child: Container(
                                 decoration: new BoxDecoration(
-                                    color: Colors.white,
+                                    color: Colors.grey[100],
                                     borderRadius: new BorderRadius.all(
                                         Radius.circular(10.0))),
                                 child: Padding(
