@@ -12,7 +12,7 @@ class PostTile extends StatelessWidget {
           child: Card(
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Colors.greenAccent,
+            backgroundColor: Colors.blueAccent,
           ),
           title: Text(myPost.description),
           subtitle: Text(myPost.date),
