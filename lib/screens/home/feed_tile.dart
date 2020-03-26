@@ -1,5 +1,7 @@
+import 'package:feed_box/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/models/post.dart';
+import 'package:provider/provider.dart';
 
 class FeedTile extends StatelessWidget {
   final Post post;
@@ -7,13 +9,14 @@ class FeedTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Container(
-      margin: EdgeInsets.fromLTRB(4,5,4,5),
+      margin: EdgeInsets.fromLTRB(4, 5, 4, 5),
       decoration: new BoxDecoration(
           color: Colors.grey[100],
           borderRadius: new BorderRadius.all(Radius.circular(10.0))),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -21,7 +24,10 @@ class FeedTile extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: 15,
-                  child: Text('RS',style: TextStyle(fontSize: 12),),
+                  child: Text(
+                    'RS',
+                    style: TextStyle(fontSize: 12),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -31,51 +37,47 @@ class FeedTile extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    height: 20,
-                    width:10,
-                    alignment: Alignment.centerRight,
-                    child: FlatButton(
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(20)),
-                      child: Text(
-                        'Follow',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.blue,
-                    ),
-                  ),
+                      height: 20,
+                      width: 10,
+                      alignment: Alignment.centerRight,
+                      child: Text('${post.date}')),
                 ),
               ],
             ),
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
-              child: Text(
-                  '${post.description}'),
+              child: Text('${post.description}'),
+            ),
+            Container(
+              child: Image.network('${post.postUrl}'),
             ),
             Divider(color: Colors.grey[700]),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                FlatButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.favorite_border, size: 15),
-                    label: Text('12')),
-                FlatButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.comment, size: 15),
-                    label: Text('1')),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    child: FlatButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.share, size: 15),
-                        label: Text('Share')),
-                  ),
-                ),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  FlatButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.favorite_border, size: 15),
+                      label: Text('12')),
+                  FlatButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.comment, size: 15),
+                      label: Text('1')),
+                  FlatButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.share, size: 15),
+                      label: Text('Share')),
+                  (user.uid == post.uid)
+                      ? Container()
+                      : FlatButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.add, size: 15),
+                          label: Text('Follow')),
+                ],
+              ),
             )
           ],
         ),
