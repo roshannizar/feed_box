@@ -7,6 +7,7 @@ class Post {
   final String likes;
   final String comments;
   final String share;
+  final String postUrl;
 
   Post(
       {this.uid,
@@ -16,5 +17,6 @@ class Post {
       this.date,
       this.likes,
       this.comments,
-      this.share});
+      this.share,
+      this.postUrl});
 }
