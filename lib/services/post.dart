@@ -10,29 +10,33 @@ class PostService {
 
   //new post
   Future newPost(String fullname, String description, String date) async {
-    return await postCollection
-        .add({'uid':uid,'fullname': fullname,'description': description, 'date': date});
+    return await postCollection.add({
+      'uid': uid,
+      'fullname': fullname,
+      'description': description,
+      'date': date
+    });
   }
 
   List<Post> _postsListCollection(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-
       return Post(
-        fullname: doc.data['fullname'] ?? '',
-        description: doc.data['description'] ?? '',
-        date: doc.data['date'] ?? ''
-      );
+          fullname: doc.data['fullname'] ?? '',
+          description: doc.data['description'] ?? '',
+          date: doc.data['date'] ?? '',
+          postUrl: doc.data['postUrl'] ?? '',
+          uid: doc.data['uid'] ?? '');
     }).toList();
   }
 
   List<Post> _userPost(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-
       return Post(
-        fullname: doc.data['fullname'] ?? '',
-        description: doc.data['description'] ?? '',
-        date: doc.data['date'] ?? ''
-      );
+          fullname: doc.data['fullname'] ?? '',
+          description: doc.data['description'] ?? '',
+          date: doc.data['date'] ?? '',
+          postUrl: doc.data['postUrl'] ?? '',
+          uid: doc.data['uid'] ?? '');
     }).toList();
   }
 
@@ -41,6 +45,9 @@ class PostService {
   }
 
   Stream<List<Post>> get myPosts {
-    return postCollection.where('uid',isEqualTo:uid).snapshots().map(_userPost);
+    return postCollection
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map(_userPost);
   }
 }
