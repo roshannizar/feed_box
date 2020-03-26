@@ -12,25 +12,26 @@ class Feed extends StatefulWidget {
 
 class _FeedState extends State<Feed> {
   final AuthService _authService = AuthService();
-  
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Post>>.value(
       value: PostService().posts,
-          child: Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
             title: Text(
               'Feed Box',
-              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blueAccent),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.blueAccent),
             ),
             elevation: 0,
             actions: <Widget>[
               IconButton(
-                onPressed: () async{
+                onPressed: () async {
                   await _authService.signOut();
                 },
-                icon: Icon(Icons.exit_to_app,color: Colors.blueAccent),
+                icon: Icon(Icons.exit_to_app, color: Colors.blueAccent),
               )
             ],
           ),
@@ -39,7 +40,7 @@ class _FeedState extends State<Feed> {
             child: Column(
               children: <Widget>[
                 Expanded(
-                    child: FeedList(),
+                  child: FeedList(),
                 ),
               ],
             ),
