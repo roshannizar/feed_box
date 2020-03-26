@@ -18,7 +18,7 @@ class _BottomPanelState extends State<BottomPanel> {
   bool isProgress = false;
   String fullname = '';
   String description;
-  String date = '2020/03/04';
+  String date = new DateTime.now().toString();
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +102,22 @@ class _BottomPanelState extends State<BottomPanel> {
                                   keyboardType: TextInputType.multiline,
                                   maxLines: 10,
                                 ),
+                              ),
+                              subtitle: Row(
+                                children: <Widget>[
+                                  IconButton(
+                                    onPressed: (){},
+                                    icon: Icon(Icons.perm_media),
+                                  ),
+                                  IconButton(
+                                    onPressed: (){},
+                                    icon: Icon(Icons.video_call),
+                                  ),
+                                  IconButton(
+                                    onPressed: (){},
+                                    icon: Icon(Icons.attach_file),
+                                  )
+                                ],
                               ),
                             ),
                           ],
