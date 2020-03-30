@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
               activeColor: Colors.blueAccent),
           BottomNavyBarItem(
               icon: Icon(Icons.message),
-              title: Text('Messages'),
+              title: Text('Chat'),
               activeColor: Colors.blueAccent),
           BottomNavyBarItem(
               icon: Icon(Icons.person),
