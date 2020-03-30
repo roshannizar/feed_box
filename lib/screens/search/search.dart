@@ -13,7 +13,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Profile>>.value(
+    return StreamProvider<List<ProfileModel>>.value(
       value: ProfileService().allProfile,
       child: Container(
         child: Scaffold(
