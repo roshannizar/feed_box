@@ -24,13 +24,13 @@ class _BottomPanelState extends State<BottomPanel> {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
-    return StreamBuilder<Profile>(
+    return StreamBuilder<ProfileModel>(
         stream: ProfileService(uid: user.uid).profileData,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Loading();
           } else {
-            Profile profileData = snapshot.data;
+            ProfileModel profileData = snapshot.data;
 
             return SafeArea(
               child: Container(
