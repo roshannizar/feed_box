@@ -1,4 +1,6 @@
 import 'package:feed_box/models/user.dart';
+import 'package:feed_box/screens/feeds/comments/comments.dart';
+import 'package:feed_box/screens/feeds/likes/likes.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/models/post.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +51,17 @@ class FeedTile extends StatelessWidget {
               child: Text('${post.description}'),
             ),
             Container(
-              child: Image.network('${post.postUrl}'),
+              child: Image.network('${post.postUrl}', loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                if(loadingProgress == null) {
+                  return child;
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value:  loadingProgress.expectedTotalBytes != null? loadingProgress.cumulativeBytesLoaded/loadingProgress.expectedTotalBytes:null,
+                    ),
+                  );
+                }
+              }),
             ),
             Divider(color: Colors.grey[700]),
             SingleChildScrollView(
@@ -58,14 +70,8 @@ class FeedTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  FlatButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite_border, size: 15),
-                      label: Text('12')),
-                  FlatButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.comment, size: 15),
-                      label: Text('1')),
+                  Likes(docid: post.documentId),
+                  Comments(docid: post.documentId),
                   FlatButton.icon(
                       onPressed: () {},
                       icon: Icon(Icons.share, size: 15),
