@@ -14,6 +14,6 @@ class _CommentsTileState extends State<CommentsTile> {
     return FlatButton.icon(
         onPressed: () {},
         icon: Icon(Icons.comment, size: 15),
-        label: Text('${comments.length}'));
+        label: Text(comments.length == 0 ? '' : '${comments.length}'));
   }
 }
