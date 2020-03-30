@@ -13,7 +13,7 @@ class _SearchListState extends State<SearchList> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    final profiles = Provider.of<List<Profile>>(context) ?? [];
+    final profiles = Provider.of<List<ProfileModel>>(context) ?? [];
 
     return ListView.builder(
       shrinkWrap: true,
