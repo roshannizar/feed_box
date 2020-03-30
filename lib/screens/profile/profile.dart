@@ -1,6 +1,6 @@
 import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/models/user_model.dart';
-import 'package:feed_box/services/profile.dart';
+import 'package:feed_box/services/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

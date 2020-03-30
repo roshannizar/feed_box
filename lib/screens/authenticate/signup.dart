@@ -1,4 +1,4 @@
-import 'package:feed_box/services/auth.dart';
+import 'package:feed_box/services/auth_service.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/shared/constant.dart';
@@ -20,7 +20,7 @@ class _SignUpState extends State<SignUp> {
   String email = '';
   String password = '';
   String confirmpassword = '';
-  String fullname='';
+  String fullname = '';
   String error = '';
 
   @override
@@ -35,7 +35,10 @@ class _SignUpState extends State<SignUp> {
                     gradient: LinearGradient(
                   begin: Alignment.center,
                   end: Alignment(1, 1),
-                  colors: [const Color(0xFF1c92d2),const Color(0xFFf2fcfe),],
+                  colors: [
+                    const Color(0xFF1c92d2),
+                    const Color(0xFFf2fcfe),
+                  ],
                 )),
                 child: Column(
                   children: <Widget>[
@@ -155,7 +158,9 @@ class _SignUpState extends State<SignUp> {
 
                                                 dynamic result =
                                                     await _authService.signup(
-                                                        email, password,fullname);
+                                                        email,
+                                                        password,
+                                                        fullname);
 
                                                 if (result == null) {
                                                   setState(() {

@@ -2,7 +2,7 @@ import 'package:feed_box/models/chat_model.dart';
 import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/messages/chat_container.dart';
-import 'package:feed_box/services/message.dart';
+import 'package:feed_box/services/message_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

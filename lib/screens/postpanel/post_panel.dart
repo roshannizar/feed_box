@@ -1,7 +1,7 @@
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/postpanel/my_post.dart';
-import 'package:feed_box/services/post.dart';
+import 'package:feed_box/services/post_service.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:provider/provider.dart';

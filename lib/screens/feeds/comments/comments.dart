@@ -1,6 +1,6 @@
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments_tile.dart';
-import 'package:feed_box/services/post.dart';
+import 'package:feed_box/services/post_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
