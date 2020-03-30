@@ -17,7 +17,30 @@ class PostService {
       'fullname': fullname,
       'description': description,
       'date': date
+    }).catchError((e) {
+      print(e);
     });
+  }
+
+  Future newLike(
+      String profile, String docid, String likedocid, bool liked) async {
+    if (liked) {
+      return await postCollection
+          .document(docid)
+          .collection('likes')
+          .document(likedocid)
+          .delete()
+          .catchError((e) {
+        print(e);
+      });
+    } else {
+      return await postCollection
+          .document(docid)
+          .collection('likes')
+          .add({'profile': profile}).catchError((e) {
+        print(e);
+      });
+    }
   }
 
   List<PostModel> _postsListCollection(QuerySnapshot snapshot) {
@@ -45,7 +68,8 @@ class PostService {
 
   List<LikeModel> _likes(QuerySnapshot snapshot) {
     return snapshot.documents.map((f) {
-      return LikeModel(profile: f.data['profile'] ?? '');
+      return LikeModel(
+          profile: f.data['profile'] ?? '', likedocid: f.documentID ?? '');
     }).toList();
   }
 
