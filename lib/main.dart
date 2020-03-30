@@ -1,4 +1,5 @@
 import 'package:feed_box/models/user.dart';
+import 'package:feed_box/screens/messages/chat.dart';
 import 'package:feed_box/screens/wrapper.dart';
 import 'package:feed_box/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,11 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Wrapper()
+        initialRoute: '/',
+        routes: {
+          '/':(context) => Wrapper(),
+          '/chat':(context) => Chat()
+        },
       )
     );
   }
