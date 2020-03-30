@@ -1,5 +1,5 @@
-import 'package:feed_box/models/profile.dart';
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/profile_model.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/services/profile.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _BottomPanelState extends State<BottomPanel> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
 
     return StreamBuilder<ProfileModel>(
         stream: ProfileService(uid: user.uid).profileData,

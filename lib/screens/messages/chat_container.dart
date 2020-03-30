@@ -1,5 +1,5 @@
 import 'package:feed_box/models/chat_model.dart';
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class ChatContainer extends StatefulWidget {
 class _ChatContainerState extends State<ChatContainer> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
     final chat = Provider.of<List<ChatModel>>(context) ?? [];
 
     return ListView.builder(

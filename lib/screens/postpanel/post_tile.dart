@@ -1,8 +1,8 @@
-import 'package:feed_box/models/post.dart';
+import 'package:feed_box/models/post_model.dart';
 import 'package:flutter/material.dart';
 
 class PostTile extends StatelessWidget {
-  final Post myPost;
+  final PostModel myPost;
   PostTile({this.myPost});
 
   @override

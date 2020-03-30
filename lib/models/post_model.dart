@@ -1,4 +1,4 @@
-class Post {
+class PostModel {
   final String uid;
   final String title;
   final String fullname;
@@ -9,7 +9,7 @@ class Post {
   final String share;
   final String postUrl;
 
-  Post(
+  PostModel(
       {this.uid,
       this.fullname,
       this.title,

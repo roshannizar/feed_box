@@ -1,6 +1,6 @@
 import 'package:feed_box/models/chat_model.dart';
-import 'package:feed_box/models/profile.dart';
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/profile_model.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/messages/chat_container.dart';
 import 'package:feed_box/services/message.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _ChatState extends State<Chat> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
     final ProfileModel args = ModalRoute.of(context).settings.arguments;
 
     return StreamProvider<List<ChatModel>>.value(

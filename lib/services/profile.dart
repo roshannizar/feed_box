@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feed_box/models/follower_list_model.dart';
-import 'package:feed_box/models/profile.dart';
+import 'package:feed_box/models/profile_model.dart';
 
 class ProfileService {
   final String uid;
@@ -22,7 +22,6 @@ class ProfileService {
   }
 
   ProfileModel _profileData(DocumentSnapshot snapshot) {
-
     return ProfileModel(
         uid: uid,
         fullname: snapshot.data['fullname'],

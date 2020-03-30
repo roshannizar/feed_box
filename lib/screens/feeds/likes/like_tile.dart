@@ -1,5 +1,5 @@
 import 'package:feed_box/models/like_model.dart';
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class _LikeTileState extends State<LikeTile> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
     final likesCount = Provider.of<List<LikeModel>>(context) ?? [];
 
     likesCount.forEach((f) {

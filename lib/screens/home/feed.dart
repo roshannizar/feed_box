@@ -1,4 +1,4 @@
-import 'package:feed_box/models/post.dart';
+import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/services/auth.dart';
 import 'package:feed_box/services/post.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class _FeedState extends State<Feed> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Post>>.value(
+    return StreamProvider<List<PostModel>>.value(
       value: PostService().posts,
       child: Scaffold(
           appBar: AppBar(

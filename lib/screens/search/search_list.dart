@@ -1,5 +1,5 @@
-import 'package:feed_box/models/profile.dart';
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/profile_model.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:feed_box/screens/search/search_tile.dart';
@@ -12,7 +12,7 @@ class SearchList extends StatefulWidget {
 class _SearchListState extends State<SearchList> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
     final profiles = Provider.of<List<ProfileModel>>(context) ?? [];
 
     return ListView.builder(

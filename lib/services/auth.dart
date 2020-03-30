@@ -1,4 +1,4 @@
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/services/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,12 +6,12 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //User model
-  User _user(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+  UserModel _user(FirebaseUser user) {
+    return user != null ? UserModel(uid: user.uid) : null;
   }
 
   //Auth change user stream
-  Stream<User> get user {
+  Stream<UserModel> get user {
     return _auth.onAuthStateChanged.map(_user);
   }
 
@@ -29,12 +29,12 @@ class AuthService {
   }
 
   //User Signup
-  Future signup(String email, String password,String fullname) async {
+  Future signup(String email, String password, String fullname) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await ProfileService(uid: user.uid).updateProfile(fullname,email);
+      await ProfileService(uid: user.uid).updateProfile(fullname, email);
       return _user(user);
     } catch (e) {
       print(e.toString());

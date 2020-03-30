@@ -1,5 +1,5 @@
-import 'package:feed_box/models/post.dart';
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/post_model.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/postpanel/my_post.dart';
 import 'package:feed_box/services/post.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +26,9 @@ class _PostPanelState extends State<PostPanel> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
 
-    return StreamProvider<List<Post>>.value(
+    return StreamProvider<List<PostModel>>.value(
         value: PostService(uid: user.uid).myPosts,
         child: Scaffold(
             appBar: AppBar(

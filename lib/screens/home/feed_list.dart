@@ -1,6 +1,6 @@
+import 'package:feed_box/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:feed_box/models/post.dart';
 import 'package:feed_box/screens/home/feed_tile.dart';
 
 class FeedList extends StatefulWidget {
@@ -11,7 +11,7 @@ class FeedList extends StatefulWidget {
 class _FeedListState extends State<FeedList> {
   @override
   Widget build(BuildContext context) {
-    final posts = Provider.of<List<Post>>(context) ?? [];
+    final posts = Provider.of<List<PostModel>>(context) ?? [];
 
     return posts.length == 0
         ? Container(

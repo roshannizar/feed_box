@@ -1,4 +1,4 @@
-import 'package:feed_box/models/profile.dart';
+import 'package:feed_box/models/profile_model.dart';
 import 'package:flutter/material.dart';
 
 class SearchTile extends StatelessWidget {

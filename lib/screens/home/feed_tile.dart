@@ -1,17 +1,17 @@
-import 'package:feed_box/models/user.dart';
+import 'package:feed_box/models/post_model.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments.dart';
 import 'package:feed_box/screens/feeds/likes/likes.dart';
 import 'package:flutter/material.dart';
-import 'package:feed_box/models/post.dart';
 import 'package:provider/provider.dart';
 
 class FeedTile extends StatelessWidget {
-  final Post post;
+  final PostModel post;
   FeedTile({this.post});
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<UserModel>(context);
     return Container(
       margin: EdgeInsets.fromLTRB(4, 5, 4, 5),
       decoration: new BoxDecoration(

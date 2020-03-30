@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/models/like_model.dart';
-import 'package:feed_box/models/post.dart';
+import 'package:feed_box/models/post_model.dart';
 
 class PostService {
   final String uid;
@@ -20,9 +20,9 @@ class PostService {
     });
   }
 
-  List<Post> _postsListCollection(QuerySnapshot snapshot) {
+  List<PostModel> _postsListCollection(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Post(
+      return PostModel(
           fullname: doc.data['fullname'] ?? '',
           description: doc.data['description'] ?? '',
           date: doc.data['date'] ?? '',
@@ -32,9 +32,9 @@ class PostService {
     }).toList();
   }
 
-  List<Post> _userPost(QuerySnapshot snapshot) {
+  List<PostModel> _userPost(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Post(
+      return PostModel(
           fullname: doc.data['fullname'] ?? '',
           description: doc.data['description'] ?? '',
           date: doc.data['date'] ?? '',
@@ -56,7 +56,7 @@ class PostService {
     }).toList();
   }
 
-  Stream<List<Post>> get posts {
+  Stream<List<PostModel>> get posts {
     return postCollection.snapshots().map(_postsListCollection);
   }
 
@@ -76,7 +76,7 @@ class PostService {
         .map(_comments);
   }
 
-  Stream<List<Post>> get myPosts {
+  Stream<List<PostModel>> get myPosts {
     return postCollection
         .where('uid', isEqualTo: uid)
         .snapshots()
