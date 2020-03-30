@@ -17,6 +17,6 @@ class _LikesState extends State<Likes> {
 
     return StreamProvider<List<LikeModel>>.value(
         value: PostService(uid: widget.docid).likes,
-        child: LikeTile());
+        child: LikeTile(docid: widget.docid));
   }
 }

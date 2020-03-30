@@ -1,5 +1,6 @@
 class LikeModel {
   final String profile;
+  final String likedocid;
 
-  LikeModel({this.profile});
+  LikeModel({this.profile,this.likedocid});
 }
