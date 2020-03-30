@@ -2,8 +2,9 @@ import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/services/auth.dart';
 import 'package:feed_box/services/post.dart';
 import 'package:flutter/material.dart';
-import 'package:feed_box/screens/home/feed_list.dart';
 import 'package:provider/provider.dart';
+
+import 'feed_list.dart';
 
 class Feed extends StatefulWidget {
   @override

@@ -1,8 +1,8 @@
+import 'package:feed_box/screens/feeds/feed.dart';
 import 'package:feed_box/screens/messages/messages.dart';
 import 'package:feed_box/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:feed_box/screens/home/feed.dart';
 import 'package:feed_box/screens/search/search.dart';
 import 'package:feed_box/screens/postpanel/post_panel.dart';
 

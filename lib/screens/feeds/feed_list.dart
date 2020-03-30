@@ -1,7 +1,8 @@
 import 'package:feed_box/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:feed_box/screens/home/feed_tile.dart';
+
+import 'feed_tile.dart';
 
 class FeedList extends StatefulWidget {
   @override
