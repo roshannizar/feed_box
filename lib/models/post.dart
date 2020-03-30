@@ -4,7 +4,7 @@ class Post {
   final String fullname;
   final String description;
   final String date;
-  final String likes;
+  final String documentId;
   final String comments;
   final String share;
   final String postUrl;
@@ -15,7 +15,7 @@ class Post {
       this.title,
       this.description,
       this.date,
-      this.likes,
+      this.documentId,
       this.comments,
       this.share,
       this.postUrl});
