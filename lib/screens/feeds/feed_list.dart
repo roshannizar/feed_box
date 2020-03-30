@@ -21,9 +21,15 @@ class _FeedListState extends State<FeedList> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                 Image.asset('assets/empty-inbox.png',width: 200),
-                 SizedBox(height: 20,),
-                 Text('You have not posted anything!',textAlign: TextAlign.center,style: TextStyle(fontSize: 16),)
+                  Image.asset('assets/empty-inbox.png', width: 200),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'You have not posted anything!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  )
                 ],
               ),
             ),
