@@ -2,8 +2,7 @@ import 'package:feed_box/models/profile.dart';
 import 'package:flutter/material.dart';
 
 class SearchTile extends StatelessWidget {
-
-  final Profile profile;
+  final ProfileModel profile;
   SearchTile({this.profile});
 
   @override
@@ -14,8 +13,16 @@ class SearchTile extends StatelessWidget {
           leading: CircleAvatar(
             backgroundColor: Colors.blueGrey,
           ),
-          title: Text('${profile.fullname}',style: TextStyle(fontWeight: FontWeight.bold)),
+          title: Text('${profile.fullname}',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           subtitle: Text('@${profile.email}'),
+          trailing: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/chat',arguments: ProfileModel(email: profile.email,fullname: profile.fullname,uid: profile.uid),
+                  );
+            },
+            icon: Icon(Icons.chat, color: Colors.blue),
+          ),
         ),
       ),
     );
