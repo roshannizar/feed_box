@@ -16,7 +16,7 @@ class _CommentsState extends State<Comments> {
   Widget build(BuildContext context) {
     return StreamProvider<List<CommentModel>>.value(
       value: PostService(uid: widget.docid).getComments,
-      child: CommentsTile(),
+      child: CommentsTile(docid: widget.docid),
     );
   }
 }
