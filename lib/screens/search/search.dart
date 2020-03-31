@@ -18,23 +18,23 @@ class _SearchState extends State<Search> {
       child: Container(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: Colors.white,
             title: Form(
               child: TextFormField(
                 decoration: textInputDecoration.copyWith(
                     hintText: 'Search Feed, Person ...',
-                    fillColor: Colors.blueAccent,
+                    fillColor: Colors.grey[100],
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueAccent)),
+                        borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueAccent)),
-                    hintStyle: TextStyle(color: Colors.white)),
+                        borderSide: BorderSide(color: Colors.white)),
+                    hintStyle: TextStyle(color: Colors.black)),
               ),
             ),
             actions: <Widget>[
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.cancel),
+                icon: Icon(Icons.cancel,color: Colors.black,),
               )
             ],
           ),

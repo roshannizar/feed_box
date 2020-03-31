@@ -9,19 +9,28 @@ class PostTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (myPost.description != '') {
-      return Container(
-          child: Card(
-        child: ListTile(
-          leading:  ProfileHeader(profile: myPost.uid,type:'Post Tile'),
-          title: Text(myPost.description),
-          trailing: Tooltip(
-            message: 'posted on ${myPost.date}',
-            child: Icon(Icons.info),
-          ),
+      return Card(
+          child: Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            Image.network('${myPost.postUrl}'),
+            SizedBox(height: 5),
+            Text('${myPost.description}'),
+            ListTile(
+              trailing: Tooltip(
+                message: myPost.date,
+                child: Icon(Icons.info),
+              ),
+            ),
+          ],
         ),
       ));
     } else {
-      return Container(width:0,height: 0,);
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
   }
 }

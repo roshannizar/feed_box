@@ -32,14 +32,14 @@ class _PostPanelState extends State<PostPanel> {
         value: PostService(uid: user.uid).myPosts,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('My Post'),
-              backgroundColor: Colors.blueAccent,
+              title: Text('My Post',style: TextStyle(color: Colors.black)),
+              backgroundColor: Colors.white,
               actions: <Widget>[
                 IconButton(
                   onPressed: () {
                     _showPostPanel();
                   },
-                  icon: Icon(Icons.add),
+                  icon: Icon(Icons.add,color: Colors.black,),
                 ),
               ],
             ),
