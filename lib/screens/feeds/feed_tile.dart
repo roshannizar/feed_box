@@ -39,7 +39,7 @@ class FeedTile extends StatelessWidget {
                       height: 20,
                       width: 10,
                       alignment: Alignment.centerRight,
-                      child: Text('${post.date}')),
+                      child: Tooltip(message: 'posted on ${post.date}',child: Icon(Icons.info))),
                 ),
               ],
             ),

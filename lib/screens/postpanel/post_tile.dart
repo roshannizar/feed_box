@@ -14,7 +14,10 @@ class PostTile extends StatelessWidget {
         child: ListTile(
           leading:  ProfileHeader(profile: myPost.uid,type:'Post Tile'),
           title: Text(myPost.description),
-          subtitle: Text(myPost.date),
+          trailing: Tooltip(
+            message: 'posted on ${myPost.date}',
+            child: Icon(Icons.info),
+          ),
         ),
       ));
     } else {
