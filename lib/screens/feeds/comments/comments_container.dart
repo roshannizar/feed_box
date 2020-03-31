@@ -22,8 +22,9 @@ class _CommentsContainerState extends State<CommentsContainer> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.all(10),
-              child: Text('Nawzath Post')),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: Text('Nawzath Post')),
             Divider(),
             Container(
               padding: const EdgeInsets.all(10),
@@ -34,7 +35,7 @@ class _CommentsContainerState extends State<CommentsContainer> {
               padding: const EdgeInsets.all(10),
               child: TextFormField(
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                    border: InputBorder.none,
                     suffixIcon: Icon(Icons.send),
                     hintText: 'Enter comments here ...'),
               ),
