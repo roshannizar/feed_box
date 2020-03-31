@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/services/post_service.dart';
@@ -5,6 +7,7 @@ import 'package:feed_box/services/profile_service.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/shared/constant.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class BottomPanel extends StatefulWidget {
@@ -18,6 +21,28 @@ class _BottomPanelState extends State<BottomPanel> {
   bool isProgress = false;
   String fullname = '';
   String description;
+  String image,video;
+  File file;
+
+  Future getVideo() async {
+    var holdVideo = await ImagePicker.pickVideo(source: ImageSource.gallery);
+
+    setState(() {
+      file = holdVideo;
+      video='done';
+      image = null;
+    });
+  }
+
+  Future getImage() async {
+    var holdImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      file = holdImage;
+      video = null;
+      image='done';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +81,7 @@ class _BottomPanelState extends State<BottomPanel> {
                                     fullname = profileData.fullname;
                                   });
                                   await PostService(uid: user.uid)
-                                      .newPost(fullname, description);
+                                      .newPost(fullname, description, file);
 
                                   setState(() {
                                     isProgress = false;
@@ -84,8 +109,7 @@ class _BottomPanelState extends State<BottomPanel> {
                           children: <Widget>[
                             ListTile(
                               leading: CircleAvatar(
-                                backgroundColor: Colors.blueAccent,
-                                child: Text('RS'),
+                                backgroundImage: NetworkImage('${profileData.profileUrl}'),
                               ),
                               title: Padding(
                                 padding:
@@ -105,15 +129,19 @@ class _BottomPanelState extends State<BottomPanel> {
                               subtitle: Row(
                                 children: <Widget>[
                                   IconButton(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.perm_media),
+                                    onPressed: () async {
+                                      await getImage();
+                                    },
+                                    icon: Icon(image== null ?Icons.perm_media:Icons.done),
                                   ),
                                   IconButton(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.video_call),
+                                    onPressed: () async {
+                                      await getVideo();
+                                    },
+                                    icon: Icon(video == null ? Icons.video_call: Icons.done),
                                   ),
                                   IconButton(
-                                    onPressed: (){},
+                                    onPressed: () {},
                                     icon: Icon(Icons.attach_file),
                                   )
                                 ],

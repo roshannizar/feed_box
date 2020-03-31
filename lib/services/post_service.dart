@@ -1,29 +1,53 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/models/like_model.dart';
 import 'package:feed_box/models/post_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
 class PostService {
   final String uid;
   final CollectionReference postCollection =
       Firestore.instance.collection('post');
+  final StorageReference firebaseStorage =
+      FirebaseStorage.instance.ref().child('post');
 
   PostService({this.uid});
 
   //new post
-  Future newPost(String fullname, String description) async {
+  Future newPost(String fullname, String description, File file) async {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat.yMd().add_jm().format(now);
 
-    return await postCollection.add({
-      'uid': uid,
-      'fullname': fullname,
-      'description': description,
-      'date': formattedDate
-    }).catchError((e) {
-      print(e);
-    });
+    if (file == null) {
+      return await postCollection.add({
+        'uid': uid,
+        'fullname': fullname,
+        'description': description,
+        'date': formattedDate
+      }).catchError((e) {
+        print(e);
+      });
+    } else {
+      StorageUploadTask task = firebaseStorage
+          .child(formattedDate)
+          .putFile(file, StorageMetadata(contentType: 'video.mp4'));
+
+      await (task.onComplete).then((s) async {
+        String url = await s.ref.getDownloadURL();
+        return await postCollection.add({
+          'uid': uid,
+          'fullname': fullname,
+          'description': description,
+          'date': formattedDate,
+          'postUrl': url
+        }).catchError((e) {
+          print(e);
+        });
+      });
+    }
   }
 
   Future newLike(
@@ -94,7 +118,10 @@ class PostService {
   }
 
   Stream<List<PostModel>> get posts {
-    return postCollection.orderBy('date',descending: true).snapshots().map(_postsListCollection);
+    return postCollection
+        .orderBy('date', descending: true)
+        .snapshots()
+        .map(_postsListCollection);
   }
 
   Stream<List<LikeModel>> get likes {

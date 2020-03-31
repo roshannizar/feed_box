@@ -13,7 +13,7 @@ class _MyPostState extends State<MyPost> {
   Widget build(BuildContext context) {
     final myPosts = Provider.of<List<PostModel>>(context) ?? [];
 
-    return myPosts.length == 0
+    return myPosts.isEmpty
         ? Container(
             child: Center(
               child: Column(
