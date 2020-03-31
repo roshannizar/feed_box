@@ -4,6 +4,7 @@ import 'package:feed_box/screens/feeds/comments/comments.dart';
 import 'package:feed_box/screens/feeds/likes/likes.dart';
 import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import 'package:provider/provider.dart';
 
 class FeedTile extends StatelessWidget {
@@ -13,6 +14,7 @@ class FeedTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel>(context);
+
     return Container(
       margin: EdgeInsets.fromLTRB(4, 5, 4, 5),
       decoration: new BoxDecoration(
@@ -73,7 +75,10 @@ class FeedTile extends StatelessWidget {
                   Likes(docid: post.documentId),
                   Comments(docid: post.documentId),
                   FlatButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Share.share('${post.postUrl}',
+                            subject: '${post.description}');
+                      },
                       icon: Icon(Icons.share, size: 15),
                       label: Text('Share')),
                   (user.uid == post.uid)
