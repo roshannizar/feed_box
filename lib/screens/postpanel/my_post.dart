@@ -2,6 +2,7 @@ import 'package:feed_box/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:feed_box/screens/postpanel/post_tile.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class MyPost extends StatefulWidget {
   @override
@@ -33,12 +34,20 @@ class _MyPostState extends State<MyPost> {
               ),
             ),
           )
-        : ListView.builder(
+        : StaggeredGridView.countBuilder(
+            crossAxisCount: 4,
             itemCount: myPosts.length,
-            itemBuilder: (context, index) {
-              print(myPosts);
-              return PostTile(myPost: myPosts[index]);
-            },
+            itemBuilder: (BuildContext context, int index) => new PostTile(myPost: myPosts[index],),
+            staggeredTileBuilder: (int index) =>
+                new StaggeredTile.fit(2),
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4.0,
           );
+    // : ListView.builder(
+    //     itemCount: myPosts.length,
+    //     itemBuilder: (context, index) {
+    //       return PostTile(myPost: myPosts[index]);
+    //     },
+    //   );
   }
 }
