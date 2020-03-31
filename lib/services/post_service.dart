@@ -43,6 +43,15 @@ class PostService {
     }
   }
 
+  Future newComments(String content, String profile, String docid) async {
+    return await postCollection
+        .document(docid)
+        .collection('comments')
+        .add({'profile': profile, 'content': content}).catchError((e) {
+      print(e);
+    });
+  }
+
   List<PostModel> _postsListCollection(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return PostModel(
@@ -76,7 +85,7 @@ class PostService {
   List<CommentModel> _comments(QuerySnapshot snapshot) {
     return snapshot.documents.map((f) {
       return CommentModel(
-          profile: f.data['profile'] ?? '', content: f.data['comments'] ?? '');
+          profile: f.data['profile'] ?? '', content: f.data['content'] ?? '');
     }).toList();
   }
 
