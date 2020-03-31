@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/models/like_model.dart';
 import 'package:feed_box/models/post_model.dart';
+import 'package:intl/intl.dart';
 
 class PostService {
   final String uid;
@@ -11,12 +12,15 @@ class PostService {
   PostService({this.uid});
 
   //new post
-  Future newPost(String fullname, String description, String date) async {
+  Future newPost(String fullname, String description) async {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat.yMd().add_jm().format(now);
+
     return await postCollection.add({
       'uid': uid,
       'fullname': fullname,
       'description': description,
-      'date': date
+      'date': formattedDate
     }).catchError((e) {
       print(e);
     });
@@ -90,7 +94,7 @@ class PostService {
   }
 
   Stream<List<PostModel>> get posts {
-    return postCollection.snapshots().map(_postsListCollection);
+    return postCollection.orderBy('date',descending: true).snapshots().map(_postsListCollection);
   }
 
   Stream<List<LikeModel>> get likes {
