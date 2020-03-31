@@ -76,7 +76,7 @@ class PostService {
   List<CommentModel> _comments(QuerySnapshot snapshot) {
     return snapshot.documents.map((f) {
       return CommentModel(
-          profile: f.data['profile'], content: f.data['comments']);
+          profile: f.data['profile'] ?? '', content: f.data['comments'] ?? '');
     }).toList();
   }
 
