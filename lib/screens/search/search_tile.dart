@@ -11,7 +11,7 @@ class SearchTile extends StatelessWidget {
       child: Card(
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Colors.blueGrey,
+            backgroundImage: NetworkImage('${profile.profileUrl}'),
           ),
           title: Text('${profile.fullname}',
               style: TextStyle(fontWeight: FontWeight.bold)),

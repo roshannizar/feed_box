@@ -38,6 +38,7 @@ class _CommentsContainerState extends State<CommentsContainer> {
               alignment: Alignment.bottomCenter,
               padding: const EdgeInsets.all(10),
               child: TextFormField(
+                initialValue: commentText,
                 onChanged: (value) {
                   setState(() {
                     commentText = value;
