@@ -1,4 +1,5 @@
 import 'package:feed_box/models/comments_model.dart';
+import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';
 
 class CommentsContainerTile extends StatefulWidget {
@@ -12,16 +13,12 @@ class _CommentsContainerTileState extends State<CommentsContainerTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:const EdgeInsets.only(bottom:10),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(20)
-      ),
-      child: ListTile(
-        leading: CircleAvatar(backgroundColor: Colors.amber),
-        title: Text('${widget.comment.profile}'),
-        subtitle: Text('${widget.comment.content}'),
-      ),
-    );
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+            color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
+        child: ProfileHeader(
+            profile: widget.comment.profile,
+            content: widget.comment.content,
+            type: 'Comments'));
   }
 }

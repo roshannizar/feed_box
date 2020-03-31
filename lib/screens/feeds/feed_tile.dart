@@ -2,6 +2,7 @@ import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments.dart';
 import 'package:feed_box/screens/feeds/likes/likes.dart';
+import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,13 +25,7 @@ class FeedTile extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                CircleAvatar(
-                  radius: 15,
-                  child: Text(
-                    'RS',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
+                ProfileHeader(profile: post.uid, type: 'Feed'),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                   child: Text('${post.fullname}',
@@ -51,13 +46,18 @@ class FeedTile extends StatelessWidget {
               child: Text('${post.description}'),
             ),
             Container(
-              child: Image.network('${post.postUrl}', loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                if(loadingProgress == null) {
+              child: Image.network('${post.postUrl}', loadingBuilder:
+                  (BuildContext context, Widget child,
+                      ImageChunkEvent loadingProgress) {
+                if (loadingProgress == null) {
                   return child;
                 } else {
                   return Center(
                     child: CircularProgressIndicator(
-                      value:  loadingProgress.expectedTotalBytes != null? loadingProgress.cumulativeBytesLoaded/loadingProgress.expectedTotalBytes:null,
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes
+                          : null,
                     ),
                   );
                 }

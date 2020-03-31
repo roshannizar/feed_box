@@ -47,8 +47,11 @@ class _CommentsContainerState extends State<CommentsContainer> {
                     border: InputBorder.none,
                     suffixIcon: IconButton(
                         onPressed: () async {
-                          PostService()
+                          await PostService()
                               .newComments(commentText, user.uid, widget.docid);
+                          setState(() {
+                            commentText = '';
+                          });
                         },
                         icon: Icon(Icons.send)),
                     hintText: 'Enter comments here ...'),

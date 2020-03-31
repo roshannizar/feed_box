@@ -25,7 +25,8 @@ class ProfileService {
     return ProfileModel(
         uid: uid,
         fullname: snapshot.data['fullname'],
-        email: snapshot.data['email']);
+        email: snapshot.data['email'],
+        profileUrl: snapshot.data['profileUrl']);
   }
 
   List<ProfileModel> _profileList(QuerySnapshot snapshot) {
