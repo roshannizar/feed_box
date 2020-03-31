@@ -1,4 +1,5 @@
 import 'package:feed_box/models/comments_model.dart';
+import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments_container_list.dart';
 import 'package:feed_box/services/post_service.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,11 @@ class CommentsContainer extends StatefulWidget {
 }
 
 class _CommentsContainerState extends State<CommentsContainer> {
+  String commentText;
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserModel>(context);
+
     return StreamProvider<List<CommentModel>>.value(
       value: PostService(uid: widget.docid).getComments,
       child: Container(
@@ -34,9 +38,19 @@ class _CommentsContainerState extends State<CommentsContainer> {
               alignment: Alignment.bottomCenter,
               padding: const EdgeInsets.all(10),
               child: TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    commentText = value;
+                  });
+                },
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    suffixIcon: Icon(Icons.send),
+                    suffixIcon: IconButton(
+                        onPressed: () async {
+                          PostService()
+                              .newComments(commentText, user.uid, widget.docid);
+                        },
+                        icon: Icon(Icons.send)),
                     hintText: 'Enter comments here ...'),
               ),
             )
