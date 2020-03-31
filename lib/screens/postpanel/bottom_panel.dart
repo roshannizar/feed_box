@@ -18,7 +18,6 @@ class _BottomPanelState extends State<BottomPanel> {
   bool isProgress = false;
   String fullname = '';
   String description;
-  String date = new DateTime.now().toString();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class _BottomPanelState extends State<BottomPanel> {
                                     fullname = profileData.fullname;
                                   });
                                   await PostService(uid: user.uid)
-                                      .newPost(fullname, description, date);
+                                      .newPost(fullname, description);
 
                                   setState(() {
                                     isProgress = false;
