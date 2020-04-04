@@ -144,6 +144,7 @@ class PostService {
   Stream<List<PostModel>> get myPosts {
     return postCollection
         .where('uid', isEqualTo: uid)
+        .orderBy('date', descending: true)
         .snapshots()
         .map(_userPost);
   }

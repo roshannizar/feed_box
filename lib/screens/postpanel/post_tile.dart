@@ -1,6 +1,5 @@
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments.dart';
-import 'package:feed_box/screens/feeds/follow/follow.dart';
 import 'package:feed_box/screens/feeds/likes/likes.dart';
 import 'package:feed_box/screens/feeds/share/share.dart';
 import 'package:feed_box/shared/profile_header.dart';
