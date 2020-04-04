@@ -28,7 +28,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               );
             } else {
               return CircleAvatar(
-                  radius: 15,
+                  radius: 20,
                   backgroundImage: NetworkImage('${profileModel.profileUrl}'));
             }
           } else {
