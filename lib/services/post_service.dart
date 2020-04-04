@@ -99,7 +99,8 @@ class PostService {
           description: doc.data['description'] ?? '',
           date: doc.data['date'] ?? '',
           postUrl: doc.data['postUrl'] ?? '',
-          uid: doc.data['uid'] ?? '');
+          uid: doc.data['uid'] ?? '',
+          documentId: doc.documentID ?? '');
     }).toList();
   }
 
