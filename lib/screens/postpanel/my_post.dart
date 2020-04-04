@@ -34,20 +34,11 @@ class _MyPostState extends State<MyPost> {
               ),
             ),
           )
-        : StaggeredGridView.countBuilder(
-            crossAxisCount: 4,
+        : ListView.builder(
             itemCount: myPosts.length,
-            itemBuilder: (BuildContext context, int index) => new PostTile(myPost: myPosts[index],),
-            staggeredTileBuilder: (int index) =>
-                new StaggeredTile.fit(2),
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
+            itemBuilder: (context, index) {
+              return PostTile(myPost: myPosts[index]);
+            },
           );
-    // : ListView.builder(
-    //     itemCount: myPosts.length,
-    //     itemBuilder: (context, index) {
-    //       return PostTile(myPost: myPosts[index]);
-    //     },
-    //   );
   }
 }

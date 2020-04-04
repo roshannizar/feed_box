@@ -33,7 +33,8 @@ void _showPostPanel() {
             _showPostPanel();
           }),
       body: Container(
-        child: Text('New Messages'),
+        alignment: Alignment.center,
+        child: Text('No New Messages'),
       ),
     );
   }

@@ -21,7 +21,7 @@ class _BottomPanelState extends State<BottomPanel> {
   bool isProgress = false;
   String fullname = '';
   String description;
-  String image,video;
+  String image, video;
   File file;
 
   Future getVideo() async {
@@ -29,7 +29,7 @@ class _BottomPanelState extends State<BottomPanel> {
 
     setState(() {
       file = holdVideo;
-      video='done';
+      video = 'done';
       image = null;
     });
   }
@@ -40,7 +40,7 @@ class _BottomPanelState extends State<BottomPanel> {
     setState(() {
       file = holdImage;
       video = null;
-      image='done';
+      image = 'done';
     });
   }
 
@@ -65,15 +65,15 @@ class _BottomPanelState extends State<BottomPanel> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                         child: Text(
-                          'New Post',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                          'Feed Box',
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                       Expanded(
                         child: Container(
                             alignment: Alignment.centerRight,
-                            child: IconButton(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: FlatButton.icon(
                               onPressed: () async {
                                 if (_formkey.currentState.validate()) {
                                   setState(() {
@@ -89,8 +89,15 @@ class _BottomPanelState extends State<BottomPanel> {
                                   Navigator.pop(context);
                                 }
                               },
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
                               color: Colors.blueAccent,
-                              icon: Icon(Icons.done),
+                              label: Text('Post',
+                                  style: TextStyle(color: Colors.white)),
+                              icon: Icon(
+                                Icons.done,
+                                color: Colors.white,
+                              ),
                             )),
                       ),
                     ],
@@ -109,7 +116,8 @@ class _BottomPanelState extends State<BottomPanel> {
                           children: <Widget>[
                             ListTile(
                               leading: CircleAvatar(
-                                backgroundImage: NetworkImage('${profileData.profileUrl}'),
+                                backgroundImage:
+                                    NetworkImage('${profileData.profileUrl}'),
                               ),
                               title: Padding(
                                 padding:
@@ -121,6 +129,7 @@ class _BottomPanelState extends State<BottomPanel> {
                                       ? 'Share something, field is blank'
                                       : null,
                                   decoration: textInputDecoration.copyWith(
+                                    fillColor: Colors.white,
                                       hintText: 'Share your thoughts...'),
                                   keyboardType: TextInputType.multiline,
                                   maxLines: 10,
@@ -132,18 +141,18 @@ class _BottomPanelState extends State<BottomPanel> {
                                     onPressed: () async {
                                       await getImage();
                                     },
-                                    icon: Icon(image== null ?Icons.perm_media:Icons.done),
+                                    icon: Icon(image == null
+                                        ? Icons.perm_media
+                                        : Icons.done),
                                   ),
                                   IconButton(
                                     onPressed: () async {
                                       await getVideo();
                                     },
-                                    icon: Icon(video == null ? Icons.video_call: Icons.done),
+                                    icon: Icon(video == null
+                                        ? Icons.video_call
+                                        : Icons.done),
                                   ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.attach_file),
-                                  )
                                 ],
                               ),
                             ),
