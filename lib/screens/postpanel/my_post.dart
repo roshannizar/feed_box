@@ -2,7 +2,6 @@ import 'package:feed_box/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:feed_box/screens/postpanel/post_tile.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class MyPost extends StatefulWidget {
   @override

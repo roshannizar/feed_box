@@ -19,17 +19,17 @@ class _ProfileContainerState extends State<ProfileContainer> {
             expandedHeight: 200,
             floating: true,
             pinned: true,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.blue,
             actions: <Widget>[
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.settings),
               )
             ],
-            flexibleSpace: const FlexibleSpaceBar(
-              
+            flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Text('Vola'),
+              background: Container(color: Colors.blue,),
+              title: Text('${widget.profile.fullname}'),
             ),
           )
         ];
