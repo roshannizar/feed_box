@@ -23,16 +23,16 @@ class _CommentsContainerState extends State<CommentsContainer> {
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
-                child: Text('Nawzath Post')),
-            Divider(),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: CommentsContainerList(),
+                child: Text('Comment Section')),
+            Expanded(
+                          child: Container(
+                padding: const EdgeInsets.all(10),
+                child: CommentsContainerList(),
+              ),
             ),
             Container(
               alignment: Alignment.bottomCenter,

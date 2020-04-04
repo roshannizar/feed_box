@@ -26,7 +26,6 @@ class _FeedState extends State<Feed> {
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.blueAccent),
             ),
-            elevation: 0,
             actions: <Widget>[
               IconButton(
                 onPressed: () async {

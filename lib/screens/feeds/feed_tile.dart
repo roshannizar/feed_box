@@ -48,22 +48,25 @@ class FeedTile extends StatelessWidget {
               child: Text('${post.description}'),
             ),
             Container(
-              child: Image.network('${post.postUrl}', loadingBuilder:
-                  (BuildContext context, Widget child,
-                      ImageChunkEvent loadingProgress) {
-                if (loadingProgress == null) {
-                  return child;
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes
-                          : null,
-                    ),
-                  );
-                }
-              }),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                              child: Image.network('${post.postUrl}', loadingBuilder:
+                    (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes
+                            : null,
+                      ),
+                    );
+                  }
+                }),
+              ),
             ),
             Divider(color: Colors.grey[700]),
             SingleChildScrollView(
