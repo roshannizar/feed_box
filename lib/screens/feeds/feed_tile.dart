@@ -1,11 +1,13 @@
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/models/user_model.dart';
-import 'package:feed_box/screens/feeds/comments/comments.dart';
-import 'package:feed_box/screens/feeds/likes/likes.dart';
 import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'package:provider/provider.dart';
+
+import 'comments/comments.dart';
+import 'likes/likes.dart';
+import 'share/share.dart';
+import 'follow/follow.dart';
 
 class FeedTile extends StatelessWidget {
   final PostModel post;
@@ -28,19 +30,26 @@ class FeedTile extends StatelessWidget {
             Row(
               children: <Widget>[
                 ProfileHeader(profile: post.uid, type: 'Feed'),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text('${post.fullname}',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Text('${post.fullname}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Text(
+                        '${post.date}',
+                        style: TextStyle(fontSize: 11),
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Container(
-                      height: 20,
-                      width: 10,
-                      alignment: Alignment.centerRight,
-                      child: Tooltip(message: 'posted on ${post.date}',child: Icon(Icons.info))),
-                ),
+                (user.uid == post.uid)?Container():Follow()
               ],
             ),
             Container(
@@ -50,7 +59,7 @@ class FeedTile extends StatelessWidget {
             Container(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                              child: Image.network('${post.postUrl}', loadingBuilder:
+                child: Image.network('${post.postUrl}', loadingBuilder:
                     (BuildContext context, Widget child,
                         ImageChunkEvent loadingProgress) {
                   if (loadingProgress == null) {
@@ -77,19 +86,8 @@ class FeedTile extends StatelessWidget {
                 children: <Widget>[
                   Likes(docid: post.documentId),
                   Comments(docid: post.documentId),
-                  FlatButton.icon(
-                      onPressed: () {
-                        Share.share('${post.postUrl}',
-                            subject: '${post.description}');
-                      },
-                      icon: Icon(Icons.share, size: 15),
-                      label: Text('Share')),
-                  (user.uid == post.uid)
-                      ? Container()
-                      : FlatButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.add, size: 15),
-                          label: Text('Follow')),
+                  ShareContainer(
+                      postUrl: post.postUrl, description: post.description)
                 ],
               ),
             )
