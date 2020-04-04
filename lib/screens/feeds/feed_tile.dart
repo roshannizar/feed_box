@@ -49,7 +49,7 @@ class FeedTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                (user.uid == post.uid)?Container():Follow()
+                (user.uid == post.uid) ? Container() : Follow()
               ],
             ),
             Container(
@@ -77,20 +77,15 @@ class FeedTile extends StatelessWidget {
                 }),
               ),
             ),
-            Divider(color: Colors.grey[700]),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Likes(docid: post.documentId),
-                  Comments(docid: post.documentId),
-                  ShareContainer(
-                      postUrl: post.postUrl, description: post.description)
-                ],
-              ),
-            )
+            Divider(color: Colors.grey[400]),
+            Wrap(
+              children: <Widget>[
+                Likes(docid: post.documentId),
+                Comments(docid: post.documentId),
+                ShareContainer(
+                    postUrl: post.postUrl, description: post.description)
+              ],
+            ),
           ],
         ),
       ),
