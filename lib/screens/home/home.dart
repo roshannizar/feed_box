@@ -2,6 +2,7 @@ import 'package:feed_box/screens/feeds/feed.dart';
 import 'package:feed_box/screens/messages/messages.dart';
 import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:feed_box/screens/profile/profile.dart';
+import 'package:feed_box/services/push_notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:feed_box/screens/search/search.dart';
@@ -24,6 +25,12 @@ class _HomeState extends State<Home> {
             child: BottomPanel(),
           );
         });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    PushNotifcationService().initialise();
   }
 
   @override
@@ -69,7 +76,7 @@ class _HomeState extends State<Home> {
                 selectedIndex: bottomIndex,
                 onTabChange: (index) {
                   if (index == 2) {
-                    _showPostPanel();
+                    Navigator.pushNamed(context, '/newpost');
                   } else {
                     setState(() {
                       bottomIndex = index;
