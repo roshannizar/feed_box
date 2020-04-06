@@ -17,11 +17,12 @@ class PostService {
   PostService({this.uid});
 
   //new post
-  Future newPost(String fullname, String description, File file) async {
+  Future newPost(
+      String fullname, String description, File image, File video) async {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat.yMd().add_jm().format(now);
 
-    if (file == null) {
+    if (video == null) {
       return await postCollection.add({
         'uid': uid,
         'fullname': fullname,
@@ -33,7 +34,7 @@ class PostService {
     } else {
       StorageUploadTask task = firebaseStorage
           .child(formattedDate)
-          .putFile(file, StorageMetadata(contentType: 'video.mp4'));
+          .putFile(video ?? image, StorageMetadata(contentType: 'video.mp4'));
 
       await (task.onComplete).then((s) async {
         String url = await s.ref.getDownloadURL();
@@ -42,7 +43,9 @@ class PostService {
           'fullname': fullname,
           'description': description,
           'date': formattedDate,
-          'postUrl': url
+          'postUrl': url,
+          'video': video.toString(),
+          'image': image.toString()
         }).catchError((e) {
           print(e);
         });
@@ -88,6 +91,8 @@ class PostService {
           date: doc.data['date'] ?? '',
           postUrl: doc.data['postUrl'] ?? '',
           uid: doc.data['uid'] ?? '',
+          video: doc.data['video'] ?? '',
+          image: doc.data['image'] ?? '',
           documentId: doc.documentID ?? '');
     }).toList();
   }
@@ -100,6 +105,8 @@ class PostService {
           date: doc.data['date'] ?? '',
           postUrl: doc.data['postUrl'] ?? '',
           uid: doc.data['uid'] ?? '',
+          video: doc.data['video'] ?? '',
+          image: doc.data['image'] ?? '',
           documentId: doc.documentID ?? '');
     }).toList();
   }
