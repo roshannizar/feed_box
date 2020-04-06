@@ -21,15 +21,13 @@ class _BottomPanelState extends State<BottomPanel> {
   bool isProgress = false;
   String fullname = '';
   String description;
-  String image, video;
-  File file;
+  File image,video;
 
   Future getVideo() async {
     var holdVideo = await ImagePicker.pickVideo(source: ImageSource.gallery);
 
     setState(() {
-      file = holdVideo;
-      video = 'done';
+      video = holdVideo;
       image = null;
     });
   }
@@ -38,9 +36,8 @@ class _BottomPanelState extends State<BottomPanel> {
     var holdImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
-      file = holdImage;
+      image = holdImage;
       video = null;
-      image = 'done';
     });
   }
 
@@ -81,7 +78,7 @@ class _BottomPanelState extends State<BottomPanel> {
                                     fullname = profileData.fullname;
                                   });
                                   await PostService(uid: user.uid)
-                                      .newPost(fullname, description, file);
+                                      .newPost(fullname, description, image, video);
 
                                   setState(() {
                                     isProgress = false;
