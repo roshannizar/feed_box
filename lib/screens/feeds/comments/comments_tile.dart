@@ -35,6 +35,6 @@ class _CommentsTileState extends State<CommentsTile> {
           _showCommentsPanel();
         },
         icon: Icon(Icons.comment, size: 15),
-        label: Text(comments.length == 0 ? '' : '${comments.length}'));
+        label: Text(comments.length == 0 ? 'Comment' : comments.length ==1 ?'${comments.length} Comment':'${comments.length} Comments'));
   }
 }

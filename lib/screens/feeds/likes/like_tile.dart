@@ -39,6 +39,6 @@ class _LikeTileState extends State<LikeTile> {
           size: 15,
           color: liked ? Colors.red : Colors.black,
         ),
-        label: Text(likesList.length == 0 ? '' : '${likesList.length}'));
+        label: Text(likesList.length == 0 ? 'Like' : '${likesList.length} Likes'));
   }
 }
