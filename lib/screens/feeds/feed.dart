@@ -26,14 +26,6 @@ class _FeedState extends State<Feed> {
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.blueAccent),
             ),
-            actions: <Widget>[
-              IconButton(
-                onPressed: () async {
-                  await _authService.signOut();
-                },
-                icon: Icon(Icons.exit_to_app, color: Colors.blueAccent),
-              )
-            ],
           ),
           body: Container(
             color: Colors.white,
