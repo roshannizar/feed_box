@@ -1,6 +1,5 @@
 import 'package:feed_box/screens/feeds/feed.dart';
 import 'package:feed_box/screens/messages/messages.dart';
-import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:feed_box/screens/profile/profile.dart';
 import 'package:feed_box/services/push_notification_service.dart';
 import 'package:flutter/material.dart';
@@ -14,18 +13,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int bottomIndex = 0;
-
-  void _showPostPanel() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return FractionallySizedBox(
-            heightFactor: 0.963,
-            child: BottomPanel(),
-          );
-        });
-  }
 
   @override
   void initState() {
