@@ -64,9 +64,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
             builder: (context, child) {
               return Scaffold(
                 resizeToAvoidBottomInset: false,
-                body: SafeArea(
-                  child: ListView(shrinkWrap: true, children: <Widget>[
-                    Container(
+                body: ListView(children: <Widget>[
+                  SafeArea(
+                    child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: background
@@ -205,8 +205,8 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                         ],
                       ),
                     ),
-                  ]),
-                ),
+                  ),
+                ]),
               );
             });
   }
