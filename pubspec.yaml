@@ -30,7 +30,7 @@ dependencies:
   firebase_storage:
   image_picker:
   provider: ^3.1.0
-  bottom_navy_bar: ^3.0.0
+  google_nav_bar: ^2.0.0
   share: ^0.6.3+6
   intl: ^0.16.1
 

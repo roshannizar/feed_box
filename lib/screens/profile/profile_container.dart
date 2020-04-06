@@ -1,4 +1,5 @@
 import 'package:feed_box/models/profile_model.dart';
+import 'package:feed_box/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfileContainer extends StatefulWidget {
@@ -22,8 +23,10 @@ class _ProfileContainerState extends State<ProfileContainer> {
             backgroundColor: Colors.blue,
             actions: <Widget>[
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.settings),
+                 onPressed: () async {
+                  await AuthService().signOut();
+                },
+                icon: Icon(Icons.exit_to_app),
               )
             ],
             flexibleSpace: FlexibleSpaceBar(
