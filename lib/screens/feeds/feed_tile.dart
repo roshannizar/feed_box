@@ -1,10 +1,12 @@
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/models/user_model.dart';
+import 'package:feed_box/screens/feeds/components/feed_image.dart';
 import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'comments/comments.dart';
+import 'components/feed_player.dart';
 import 'likes/likes.dart';
 import 'share/share.dart';
 import 'follow/follow.dart';
@@ -16,7 +18,6 @@ class FeedTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel>(context);
-
     return Container(
       margin: EdgeInsets.fromLTRB(4, 5, 4, 5),
       decoration: new BoxDecoration(
@@ -56,27 +57,11 @@ class FeedTile extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
               child: Text('${post.description}'),
             ),
-            Container(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network('${post.postUrl}', loadingBuilder:
-                    (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes
-                            : null,
-                      ),
-                    );
-                  }
-                }),
-              ),
-            ),
+            (post.image != "null" && post.image != "")
+                ? FeedImage(url: post.postUrl)
+                : (post.video != '' && post.video != 'null')
+                    ? FeedPlayer(url: post.postUrl)
+                    : SizedBox(height: 0, width: 0),
             Divider(color: Colors.grey[400]),
             Wrap(
               children: <Widget>[
