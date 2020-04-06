@@ -1,10 +1,10 @@
 import 'package:feed_box/screens/feeds/feed.dart';
 import 'package:feed_box/screens/messages/messages.dart';
+import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:feed_box/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:feed_box/screens/search/search.dart';
-import 'package:feed_box/screens/postpanel/post_panel.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,44 +14,77 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int bottomIndex = 0;
 
+  void _showPostPanel() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return FractionallySizedBox(
+            heightFactor: 0.963,
+            child: BottomPanel(),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavyBar(
-        currentIndex: bottomIndex,
-        onItemSelected: (index) => setState(() {
-          bottomIndex = index;
-        }),
-        items: [
-          BottomNavyBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-            activeColor: Colors.blueAccent,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+        ]),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+                gap: 8,
+                activeColor: Colors.white,
+                iconSize: 24,
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                duration: Duration(milliseconds: 800),
+                tabBackgroundColor: Colors.blue,
+                tabs: [
+                  GButton(
+                    icon: Icons.home,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    icon: Icons.search,
+                    text: 'Search',
+                  ),
+                  GButton(
+                    icon: Icons.add_box,
+                    iconColor: Colors.blue,
+                    text: 'New Post',
+                  ),
+                  GButton(
+                    icon: Icons.message,
+                    text: 'Message',
+                  ),
+                  GButton(
+                    icon: Icons.person,
+                    text: 'Profile',
+                  ),
+                ],
+                selectedIndex: bottomIndex,
+                onTabChange: (index) {
+                  if (index == 2) {
+                    _showPostPanel();
+                  } else {
+                    setState(() {
+                      bottomIndex = index;
+                    });
+                  }
+                }),
           ),
-          BottomNavyBarItem(
-              icon: Icon(Icons.search),
-              title: Text('Search'),
-              activeColor: Colors.blueAccent),
-          BottomNavyBarItem(
-              icon: Icon(Icons.add_circle),
-              title: Text('New Post'),
-              activeColor: Colors.blueAccent),
-          BottomNavyBarItem(
-              icon: Icon(Icons.message),
-              title: Text('Chat'),
-              activeColor: Colors.blueAccent),
-          BottomNavyBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile'),
-              activeColor: Colors.blueAccent),
-        ],
+        ),
       ),
       body: SafeArea(
         child: bottomIndex == 0
             ? Feed()
             : bottomIndex == 1
                 ? Search()
-                : bottomIndex == 2 ? PostPanel() : bottomIndex == 3 ? Messages() : Profile(),
+                : bottomIndex == 3 ? Messages() : Profile(),
       ),
     );
   }
