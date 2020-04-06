@@ -1,5 +1,4 @@
 import 'package:feed_box/models/post_model.dart';
-import 'package:feed_box/services/auth_service.dart';
 import 'package:feed_box/services/post_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +11,6 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-  final AuthService _authService = AuthService();
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<PostModel>>.value(
@@ -28,6 +25,7 @@ class _FeedState extends State<Feed> {
             ),
           ),
           body: Container(
+            padding: const EdgeInsets.only(top: 5),
             color: Colors.white,
             child: Column(
               children: <Widget>[
