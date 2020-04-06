@@ -5,8 +5,8 @@ class PostModel {
   final String description;
   final String date;
   final String documentId;
-  final String comments;
-  final String share;
+  final String video;
+  final String image;
   final String postUrl;
 
   PostModel(
@@ -16,7 +16,7 @@ class PostModel {
       this.description,
       this.date,
       this.documentId,
-      this.comments,
-      this.share,
+      this.video,
+      this.image,
       this.postUrl});
 }
