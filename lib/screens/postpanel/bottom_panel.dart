@@ -53,24 +53,13 @@ class _BottomPanelState extends State<BottomPanel> {
           } else {
             ProfileModel profileData = snapshot.data;
 
-            return SafeArea(
-              child: Container(
-                  child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Text(
-                          'Feed Box',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                            alignment: Alignment.centerRight,
-                            padding: const EdgeInsets.only(right: 10),
-                            child: FlatButton.icon(
+            return Scaffold(
+              appBar: AppBar(
+                iconTheme: IconThemeData(color: Colors.black),
+                title: Text('New Post',style: TextStyle(color: Colors.black)),
+                backgroundColor: Colors.white,
+                actions: <Widget>[
+                  FlatButton.icon(
                               onPressed: () async {
                                 if (_formkey.currentState.validate()) {
                                   setState(() {
@@ -87,7 +76,7 @@ class _BottomPanelState extends State<BottomPanel> {
                                 }
                               },
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                                  borderRadius: BorderRadius.circular(0)),
                               color: Colors.blueAccent,
                               label: Text('Post',
                                   style: TextStyle(color: Colors.white)),
@@ -95,11 +84,12 @@ class _BottomPanelState extends State<BottomPanel> {
                                 Icons.done,
                                 color: Colors.white,
                               ),
-                            )),
-                      ),
-                    ],
-                  ),
-                  Divider(color: Colors.grey),
+                            )
+                ],
+              ),
+              body: Container(
+                  child: Column(
+                children: <Widget>[
                   isProgress
                       ? LinearProgressIndicator(value: null)
                       : SizedBox(
