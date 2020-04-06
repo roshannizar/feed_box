@@ -3,7 +3,6 @@ import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/postpanel/my_post.dart';
 import 'package:feed_box/services/post_service.dart';
 import 'package:flutter/material.dart';
-import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:provider/provider.dart';
 
 class PostPanel extends StatefulWidget {
@@ -12,17 +11,7 @@ class PostPanel extends StatefulWidget {
 }
 
 class _PostPanelState extends State<PostPanel> {
-  void _showPostPanel() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return FractionallySizedBox(
-            heightFactor: 0.963,
-            child: BottomPanel(),
-          );
-        });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +24,6 @@ class _PostPanelState extends State<PostPanel> {
               title: Text('My Post', style: TextStyle(color: Colors.black)),
               backgroundColor: Colors.white,
               actions: <Widget>[],
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                _showPostPanel();
-              },
-              child: Icon(Icons.mode_edit),
             ),
             body: MyPost()));
   }
