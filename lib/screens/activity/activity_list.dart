@@ -12,20 +12,23 @@ class ActivityList extends StatefulWidget {
 class _ActivityListState extends State<ActivityList> {
   @override
   Widget build(BuildContext context) {
-
     final activityList = Provider.of<List<ActivityModel>>(context) ?? [];
 
-    return activityList.length == 0 ?
-    Container(
-      alignment: Alignment.center,
-      child: Text('Your activity is empty'),
-    ):
-    ListView.builder(
-      shrinkWrap: true,
-      itemCount: activityList.length,
-      itemBuilder: (context, index) {
-        return ActivityTile(activityModel: activityList[index],);
-      },
-    );
+    return activityList.length == 0
+        ? Container(
+            alignment: Alignment.center,
+            child: Text('Your activity is empty'),
+          )
+        : ListView.separated(
+            shrinkWrap: true,
+            itemCount: activityList.length,
+            itemBuilder: (context, index) {
+              return ActivityTile(
+                activityModel: activityList[index],
+              );
+            }, separatorBuilder: (BuildContext context, int index) {
+              return Divider();
+            },
+          );
   }
 }

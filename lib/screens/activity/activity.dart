@@ -26,7 +26,7 @@ class _ActivityState extends State<Activity> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        body: ActivityList()
+        body: Container(child: ActivityList())
       ),
     );
   }

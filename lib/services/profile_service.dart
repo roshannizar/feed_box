@@ -91,6 +91,7 @@ class ProfileService {
     return profileCollection
         .document(uid)
         .collection('activity')
+        .orderBy('date',descending: true)
         .snapshots()
         .map(_activityList);
   }
