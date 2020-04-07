@@ -19,7 +19,7 @@ class _PostPanelState extends State<PostPanel> {
         value: PostService(uid: user.uid).myPosts,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('My Post', style: TextStyle(color: Colors.black)),
+              title: Text('Your Post', style: TextStyle(color: Colors.black)),
               backgroundColor: Colors.white,
               actions: <Widget>[
                 FlatButton(onPressed: () {}, child: Text('Followers 2')),

@@ -24,15 +24,30 @@ class _ProfileContainerState extends State<ProfileContainer> {
             backgroundColor: Colors.blue,
             actions: <Widget>[
               IconButton(
-                 onPressed: () async {
+                onPressed: () async {
                   await AuthService().signOut();
                 },
                 icon: Icon(Icons.exit_to_app),
+              ),
+              IconButton(
+                onPressed: () async {
+                  
+                },
+                icon: Icon(Icons.edit),
               )
             ],
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              background: Container(color: Colors.blue,),
+              background: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/maxresdefault.jpg'),fit: BoxFit.cover)
+                ),
+                    child:CircleAvatar(
+                      radius: 50,
+                        backgroundImage:
+                            NetworkImage('${widget.profile.profileUrl}'))
+              ),
               title: Text('${widget.profile.fullname}'),
             ),
           )
