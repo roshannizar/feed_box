@@ -56,20 +56,20 @@ class PostService {
   Future newLike(
       String profile, String docid, String likedocid, bool liked) async {
     if (liked) {
-      return await postCollection
+      await postCollection
           .document(docid)
           .collection('likes')
           .document(likedocid)
           .delete()
           .catchError((e) {
-        print(e);
+        return e;
       });
     } else {
-      return await postCollection
+      await postCollection
           .document(docid)
           .collection('likes')
           .add({'profile': profile}).catchError((e) {
-        print(e);
+        return e;
       });
     }
   }
