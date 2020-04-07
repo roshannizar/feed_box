@@ -83,6 +83,12 @@ class PostService {
     });
   }
 
+  Future deletePost(String docid) async {
+    return await postCollection.document(docid).delete().catchError((e) {
+      print(e);
+    }); 
+  }
+
   List<PostModel> _postsListCollection(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return PostModel(

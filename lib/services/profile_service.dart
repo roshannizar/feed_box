@@ -31,8 +31,7 @@ class ProfileService {
       'receiverUid': activityModel.receiverUid,
       'date':
           '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().toString().padLeft(2, '0')} ${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}',
-      'type': activityModel.type,
-      'status': activityModel.status
+      'title': activityModel.title
     }).catchError((e) {
       print(e);
     });
@@ -52,8 +51,7 @@ class ProfileService {
           uid: doc.data['uid'],
           date: doc.data['date'],
           receiverUid: doc.data['receiverUid'],
-          status: doc.data['status'],
-          type: doc.data['type']);
+          title: doc.data['title']);
     }).toList();
   }
 
