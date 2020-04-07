@@ -1,5 +1,5 @@
 import 'package:feed_box/screens/feeds/feed.dart';
-import 'package:feed_box/screens/messages/messages.dart';
+import 'package:feed_box/screens/activity/activity.dart';
 import 'package:feed_box/screens/profile/profile.dart';
 import 'package:feed_box/services/push_notification_service.dart';
 import 'package:flutter/material.dart';
@@ -52,8 +52,8 @@ class _HomeState extends State<Home> {
                     text: 'New Post',
                   ),
                   GButton(
-                    icon: Icons.message,
-                    text: 'Message',
+                    icon: Icons.show_chart,
+                    text: 'Activity',
                   ),
                   GButton(
                     icon: Icons.person,
@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
             ? Feed()
             : bottomIndex == 1
                 ? Search()
-                : bottomIndex == 3 ? Messages() : Profile(),
+                : bottomIndex == 3 ? Activity() : Profile(),
       ),
     );
   }
