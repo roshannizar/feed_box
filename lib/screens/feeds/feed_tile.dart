@@ -65,7 +65,7 @@ class FeedTile extends StatelessWidget {
             Divider(color: Colors.grey[400]),
             Wrap(
               children: <Widget>[
-                Likes(docid: post.documentId),
+                Likes(docid: post.documentId,),
                 Comments(docid: post.documentId),
                 ShareContainer(
                     postUrl: post.postUrl, description: post.description)
