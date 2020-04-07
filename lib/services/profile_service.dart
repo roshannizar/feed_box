@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:feed_box/models/profile_model.dart';
 
@@ -14,16 +15,27 @@ class ProfileService {
       Firestore.instance.collection('profile');
 
   Future updateProfile(String fullname, String email) async {
-    try {
-      return await profileCollection.document(uid).setData({
-        'uid': uid,
-        'fullname': fullname,
-        'email': email,
-        'profileUrl': profileUrl
-      });
-    } catch (e) {
+    return await profileCollection.document(uid).setData({
+      'uid': uid,
+      'fullname': fullname,
+      'email': email,
+      'profileUrl': profileUrl
+    }).catchError((e) {
       print(e);
-    }
+    });
+  }
+
+  Future newActivity(ActivityModel activityModel) async {
+    return await profileCollection.document(uid).collection('activity').add({
+      'uid': uid,
+      'receiverUid': activityModel.receiverUid,
+      'date':
+          '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().toString().padLeft(2, '0')} ${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}',
+      'type': activityModel.type,
+      'status': activityModel.status
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   ProfileModel _profileData(DocumentSnapshot snapshot) {
@@ -32,6 +44,17 @@ class ProfileService {
         fullname: snapshot.data['fullname'],
         email: snapshot.data['email'],
         profileUrl: snapshot.data['profileUrl']);
+  }
+
+  List<ActivityModel> _activityList(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return ActivityModel(
+          uid: doc.data['uid'],
+          date: doc.data['date'],
+          receiverUid: doc.data['receiverUid'],
+          status: doc.data['status'],
+          type: doc.data['type']);
+    }).toList();
   }
 
   List<ProfileModel> _profileList(QuerySnapshot snapshot) {
@@ -64,6 +87,14 @@ class ProfileService {
 
   Stream<ProfileModel> get profileData {
     return profileCollection.document(uid).snapshots().map(_profileData);
+  }
+
+  Stream<List<ActivityModel>> get allActivity {
+    return profileCollection
+        .document(uid)
+        .collection('activity')
+        .snapshots()
+        .map(_activityList);
   }
 
   Stream<List<ProfileModel>> get allProfile {
