@@ -1,4 +1,3 @@
-import 'package:feed_box/screens/messages/chat.dart';
 import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:feed_box/screens/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => Wrapper(),
             '/newpost': (context) => BottomPanel(),
-            '/chat': (context) => Chat()
           },
         ));
   }
