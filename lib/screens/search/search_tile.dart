@@ -16,13 +16,13 @@ class SearchTile extends StatelessWidget {
           title: Text('${profile.fullname}',
               style: TextStyle(fontWeight: FontWeight.bold)),
           subtitle: Text('@${profile.email}'),
-          trailing: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/chat',arguments: ProfileModel(email: profile.email,fullname: profile.fullname,uid: profile.uid),
-                  );
-            },
-            icon: Icon(Icons.chat, color: Colors.blue),
-          ),
+          trailing: FlatButton.icon(
+              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              onPressed: () {},
+              icon: Icon(Icons.add, color: Colors.white),
+              label: Text('Follow', style: TextStyle(color: Colors.white))),
         ),
       ),
     );
