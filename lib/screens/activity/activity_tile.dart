@@ -14,7 +14,7 @@ class _ActivityTileState extends State<ActivityTile> {
     return Container(
       child: ListTile(
         leading: CircleAvatar(backgroundColor: Colors.blue),
-        title: Text(widget.activityModel.status? 'You liked a post':'You unliked a post'),
+        title: Text("${widget.activityModel.title}"),
         subtitle: Text('${widget.activityModel.date}'),
       ),
     );
