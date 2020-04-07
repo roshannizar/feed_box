@@ -1,4 +1,5 @@
 import 'package:feed_box/models/profile_model.dart';
+import 'package:feed_box/screens/postpanel/post_panel.dart';
 import 'package:feed_box/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
           )
         ];
       },
-      body: Container(child: Text('vola')),
+      body: PostPanel(),
     ));
   }
 }
