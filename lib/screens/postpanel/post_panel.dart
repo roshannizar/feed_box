@@ -11,8 +11,6 @@ class PostPanel extends StatefulWidget {
 }
 
 class _PostPanelState extends State<PostPanel> {
-
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel>(context);
@@ -23,7 +21,10 @@ class _PostPanelState extends State<PostPanel> {
             appBar: AppBar(
               title: Text('My Post', style: TextStyle(color: Colors.black)),
               backgroundColor: Colors.white,
-              actions: <Widget>[],
+              actions: <Widget>[
+                FlatButton(onPressed: () {}, child: Text('Followers 2')),
+                FlatButton(onPressed: () {}, child: Text('Following 4')),
+              ],
             ),
             body: MyPost()));
   }
