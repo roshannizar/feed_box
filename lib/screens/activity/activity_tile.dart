@@ -18,10 +18,9 @@ class _ActivityTileState extends State<ActivityTile> {
 
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.only(top: 10),
       child: ListTile(
         leading: Container(
-            width: 50, height: 50, child: ProfileHeader(profile: user.uid)),
+            width: 50, height: 50, child: ProfileHeader(profile: widget.activityModel.receiverUid)),
         title: ProfileHeader(
             type: 'activity',
             title: widget.activityModel.title,

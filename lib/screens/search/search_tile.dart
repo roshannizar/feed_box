@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchTile extends StatefulWidget {
-    final ProfileModel profile;
+  final ProfileModel profile;
   SearchTile({this.profile});
 
   @override
@@ -15,11 +15,10 @@ class SearchTile extends StatefulWidget {
 }
 
 class _SearchTileState extends State<SearchTile> {
-  bool following=false;
+  bool following = false;
   String followerId;
   @override
   Widget build(BuildContext context) {
-
     final user = Provider.of<UserModel>(context);
     final followerList = Provider.of<List<FollowerListModel>>(context) ?? [];
 
@@ -29,7 +28,7 @@ class _SearchTileState extends State<SearchTile> {
         followerId = f.friendUid;
       }
     });
-    return  Container(
+    return Container(
       child: Card(
         child: ListTile(
           leading: CircleAvatar(
@@ -39,22 +38,34 @@ class _SearchTileState extends State<SearchTile> {
               style: TextStyle(fontWeight: FontWeight.bold)),
           subtitle: Text('@${widget.profile.email}'),
           trailing: FlatButton.icon(
-              color: following? Colors.white:Colors.blue,
+              color: following ? Colors.white : Colors.blue,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              onPressed: () async{
-                await ProfileService(uid: user.uid).newFollowing(FollowerListModel(friendUid: widget.profile.uid), following);
-
-                await ProfileService(uid: user.uid).newActivity(ActivityModel(titleDirection: false,receiverUid: widget.profile.uid,title: 'You started following'));
-
-                await ProfileService(uid: widget.profile.uid).newActivity(ActivityModel(titleDirection: true,receiverUid: user.uid,title: 'started following you'));
+              onPressed: () async {
+                await ProfileService(uid: user.uid).newFollowing(
+                    FollowerListModel(friendUid: widget.profile.uid),
+                    following);
 
                 setState(() {
-                  following=false;
+                  following = false;
                 });
+
+                await ProfileService(uid: user.uid).newActivity(ActivityModel(
+                    titleDirection: false,
+                    receiverUid: widget.profile.uid,
+                    title: 'You started following'));
+
+                await ProfileService(uid: widget.profile.uid).newActivity(
+                    ActivityModel(
+                        titleDirection: true,
+                        receiverUid: user.uid,
+                        title: 'started following you'));
               },
-              icon: Icon(following? Icons.check:Icons.add, color: following? Colors.blue:Colors.white),
-              label: Text(following? 'Following':'Follow', style: TextStyle(color: following?Colors.blue:Colors.white))),
+              icon: Icon(following ? Icons.check : Icons.add,
+                  color: following ? Colors.blue : Colors.white),
+              label: Text(following ? 'Following' : 'Follow',
+                  style: TextStyle(
+                      color: following ? Colors.blue : Colors.white))),
         ),
       ),
     );
