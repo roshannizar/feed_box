@@ -11,6 +11,8 @@ class PostService {
   final String uid;
   final CollectionReference postCollection =
       Firestore.instance.collection('post');
+      final CollectionReference profileCollection =
+      Firestore.instance.collection('profile');
   final StorageReference firebaseStorage =
       FirebaseStorage.instance.ref().child('post');
 
