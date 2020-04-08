@@ -5,7 +5,6 @@ import 'package:feed_box/models/profile_model.dart';
 
 class ProfileService {
   final String uid;
-  String profileUid;
   String profileUrl =
       'https://firebasestorage.googleapis.com/v0/b/feed-box-c1336.appspot.com/o/profile%2Fblank-profile-picture-973460_640.png?alt=media&token=35274574-be73-4e51-a0c4-49ab435803d5';
 
@@ -102,7 +101,7 @@ class ProfileService {
 
   Stream<List<FollowerListModel>> get getFollower {
     return profileCollection
-        .document(profileUid)
+        .document(uid)
         .collection('followers')
         .snapshots()
         .map(_follower);
@@ -110,7 +109,7 @@ class ProfileService {
 
   Stream<List<FollowerListModel>> get getFollowing {
     return profileCollection
-        .document(profileUid)
+        .document(uid)
         .collection('following')
         .snapshots()
         .map(_following);
