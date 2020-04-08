@@ -45,13 +45,8 @@ class _SearchTileState extends State<SearchTile> {
                 await ProfileService(uid: user.uid).newFollowing(
                     FollowerListModel(friendUid: widget.profile.uid),
                     following);
-                bool followingStatus = following;
 
-                setState(() {
-                  following = false;
-                });
-
-                if (followingStatus) {
+                if (following) {
                   await ProfileService(uid: user.uid).newActivity(ActivityModel(
                       titleDirection: false,
                       receiverUid: widget.profile.uid,
@@ -74,6 +69,10 @@ class _SearchTileState extends State<SearchTile> {
                           receiverUid: user.uid,
                           title: 'started unfollowed you'));
                 }
+
+                setState(() {
+                  following = !following;
+                });
               },
               icon: Icon(following ? Icons.check : Icons.add,
                   color: following ? Colors.blue : Colors.white),
