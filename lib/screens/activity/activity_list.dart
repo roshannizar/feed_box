@@ -17,7 +17,7 @@ class _ActivityListState extends State<ActivityList> {
     return activityList.length == 0
         ? Container(
             alignment: Alignment.center,
-            child: Text('Your activity is empty'),
+            child: Text('No activity has been tracked now'),
           )
         : ListView.separated(
             shrinkWrap: true,
@@ -26,7 +26,8 @@ class _ActivityListState extends State<ActivityList> {
               return ActivityTile(
                 activityModel: activityList[index],
               );
-            }, separatorBuilder: (BuildContext context, int index) {
+            },
+            separatorBuilder: (BuildContext context, int index) {
               return Divider();
             },
           );
