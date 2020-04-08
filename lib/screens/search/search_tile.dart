@@ -1,5 +1,8 @@
+import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:feed_box/models/profile_model.dart';
+import 'package:feed_box/models/user_model.dart';
+import 'package:feed_box/services/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +20,7 @@ class _SearchTileState extends State<SearchTile> {
   @override
   Widget build(BuildContext context) {
 
+    final user = Provider.of<UserModel>(context);
     final followerList = Provider.of<List<FollowerListModel>>(context) ?? [];
 
     followerList.forEach((f) {
@@ -38,7 +42,17 @@ class _SearchTileState extends State<SearchTile> {
               color: following? Colors.white:Colors.blue,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              onPressed: () {},
+              onPressed: () async{
+                await ProfileService(uid: user.uid).newFollowing(FollowerListModel(friendUid: widget.profile.uid), following);
+
+                await ProfileService(uid: user.uid).newActivity(ActivityModel(titleDirection: false,receiverUid: widget.profile.uid,title: 'You started following'));
+
+                await ProfileService(uid: widget.profile.uid).newActivity(ActivityModel(titleDirection: true,receiverUid: user.uid,title: 'started following you'));
+
+                setState(() {
+                  following=false;
+                });
+              },
               icon: Icon(following? Icons.check:Icons.add, color: following? Colors.blue:Colors.white),
               label: Text(following? 'Following':'Follow', style: TextStyle(color: following?Colors.blue:Colors.white))),
         ),
