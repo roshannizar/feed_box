@@ -1,15 +1,12 @@
 import 'package:feed_box/models/post_model.dart';
-import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/feeds/components/feed_image.dart';
 import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'comments/comments.dart';
 import 'components/feed_player.dart';
 import 'likes/likes.dart';
 import 'share/share.dart';
-import 'follow/follow.dart';
 
 class FeedTile extends StatelessWidget {
   final PostModel post;
@@ -17,7 +14,7 @@ class FeedTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModel>(context);
+
     return Container(
       margin: EdgeInsets.fromLTRB(4, 5, 4, 5),
       decoration: new BoxDecoration(
@@ -50,7 +47,6 @@ class FeedTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                (user.uid == post.uid) ? Container() : Follow()
               ],
             ),
             Container(
