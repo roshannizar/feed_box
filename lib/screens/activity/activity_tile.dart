@@ -15,15 +15,22 @@ class _ActivityTileState extends State<ActivityTile> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel>(context);
-    
+
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.only(top:10),
+      padding: const EdgeInsets.only(top: 10),
       child: ListTile(
-        leading: Container(width: 50,height: 50,child: ProfileHeader(profile: user.uid)),
-        title: Text("${widget.activityModel.title}"),
+        leading: Container(
+            width: 50, height: 50, child: ProfileHeader(profile: user.uid)),
+        title: ProfileHeader(
+            type: 'activity',
+            title: widget.activityModel.title,
+            profile: widget.activityModel.receiverUid,
+            titleDirection: widget.activityModel.titleDirection),
         subtitle: Text('${widget.activityModel.date}'),
-        trailing: Tooltip(message: 'Coming soon',child: Icon(Icons.local_activity,color: Colors.green)),
+        trailing: Tooltip(
+            message: 'Coming soon',
+            child: Icon(Icons.local_activity, color: Colors.green)),
       ),
     );
   }

@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 
 class Likes extends StatefulWidget {
   final String docid;
-  Likes({this.docid});
+  final String uid;
+  Likes({this.docid, this.uid});
   @override
   _LikesState createState() => _LikesState();
 }
@@ -14,9 +15,11 @@ class Likes extends StatefulWidget {
 class _LikesState extends State<Likes> {
   @override
   Widget build(BuildContext context) {
-
     return StreamProvider<List<LikeModel>>.value(
         value: PostService(uid: widget.docid).likes,
-        child: LikeTile(docid: widget.docid));
+        child: LikeTile(
+          docid: widget.docid,
+          uid: widget.uid,
+        ));
   }
 }

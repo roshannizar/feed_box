@@ -27,10 +27,61 @@ class ProfileService {
   Future newActivity(ActivityModel activityModel) async {
     return await profileCollection.document(uid).collection('activity').add({
       'uid': uid,
+      'titleDirection':activityModel.titleDirection,
       'receiverUid': activityModel.receiverUid,
       'date':
           '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().toString().padLeft(2, '0')} ${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}',
       'title': activityModel.title
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future newFollowing(
+      FollowerListModel followerListModel, bool following) async {
+    if (following) {
+      await profileCollection
+          .document(uid)
+          .collection('following')
+          .document(followerListModel.friendUid)
+          .delete()
+          .catchError((e) {
+        print(e);
+      });
+
+      await profileCollection
+          .document(followerListModel.friendUid)
+          .collection('followers')
+          .document(uid)
+          .delete()
+          .catchError((e) {
+        print(e);
+      });
+    } else {
+      await profileCollection
+          .document(uid)
+          .collection('following')
+          .document(followerListModel.friendUid)
+          .setData({
+        'friendName': followerListModel.friendName,
+        'friendUid': followerListModel.friendUid
+      }).catchError((e) {
+        print(e);
+      });
+
+      await profileCollection
+          .document(followerListModel.friendUid)
+          .collection('followers')
+          .document(uid)
+          .setData(
+              {'friendName': followerListModel.friendName, 'friendUid': uid});
+    }
+  }
+
+  Future unFollowing(FollowerListModel followerListModel) async {
+    return await profileCollection.document(uid).collection('follower').add({
+      'friendName': followerListModel.friendName,
+      'friendUid': followerListModel.friendUid
     }).catchError((e) {
       print(e);
     });
@@ -50,6 +101,7 @@ class ProfileService {
           uid: doc.data['uid'],
           date: doc.data['date'],
           receiverUid: doc.data['receiverUid'],
+          titleDirection: doc.data['titleDirection'],
           title: doc.data['title']);
     }).toList();
   }
@@ -69,7 +121,7 @@ class ProfileService {
       return FollowerListModel(
           friendName: doc.data['friendName'],
           friendUid: doc.data['friendUid'],
-          messageId: doc.data['messageId']);
+          docid: doc.data['docid']);
     }).toList();
   }
 
@@ -78,7 +130,7 @@ class ProfileService {
       return FollowerListModel(
           friendName: doc.data['friendName'],
           friendUid: doc.data['friendUid'],
-          messageId: doc.data['messageId']);
+          docid: doc.data['docid']);
     }).toList();
   }
 
@@ -90,7 +142,7 @@ class ProfileService {
     return profileCollection
         .document(uid)
         .collection('activity')
-        .orderBy('date',descending: true)
+        .orderBy('date', descending: true)
         .snapshots()
         .map(_activityList);
   }

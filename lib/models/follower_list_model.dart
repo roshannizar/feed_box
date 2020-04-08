@@ -1,7 +1,7 @@
 class FollowerListModel {
   final String friendName;
   final String friendUid;
-  final String messageId;
+  final String docid;
 
-  FollowerListModel({this.friendName,this.friendUid,this.messageId});
+  FollowerListModel({this.friendName,this.friendUid,this.docid});
 }

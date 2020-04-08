@@ -3,8 +3,10 @@ import 'package:feed_box/services/profile_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatefulWidget {
-  final String profile, content, type;
-  ProfileHeader({this.profile, this.content, this.type});
+  final String profile, content, type, title;
+  final bool titleDirection;
+  ProfileHeader(
+      {this.profile, this.content, this.type, this.title, this.titleDirection});
   @override
   _ProfileHeaderState createState() => _ProfileHeaderState();
 }
@@ -26,6 +28,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 title: Text('${profileModel.fullname}'),
                 subtitle: Text('${widget.content}'),
               );
+            } else if (widget.type == 'activity') {
+              return Text(widget.titleDirection
+                  ? '${profileModel.fullname} ${widget.title}'
+                  : '${widget.title} ${profileModel.fullname}');
             } else {
               return CircleAvatar(
                   radius: 20,

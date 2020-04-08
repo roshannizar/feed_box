@@ -39,7 +39,11 @@ class _LikeTileState extends State<LikeTile> {
           });
 
           await ProfileService(uid: user.uid).newActivity(ActivityModel(
-              title: likedStatus?'You have liked a post of':'You have unliked a post of', receiverUid: widget.uid));
+              titleDirection: false,
+              title: likedStatus
+                  ? 'You have liked a post of'
+                  : 'You have unliked a post of',
+              receiverUid: widget.uid));
         },
         icon: Icon(
           liked ? Icons.favorite : Icons.favorite_border,
