@@ -2,6 +2,8 @@ import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/postpanel/my_post.dart';
 import 'package:feed_box/services/post_service.dart';
+import 'package:feed_box/services/profile_service.dart';
+import 'package:feed_box/shared/follower.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +24,12 @@ class _PostPanelState extends State<PostPanel> {
               title: Text('Your Post', style: TextStyle(color: Colors.black)),
               backgroundColor: Colors.white,
               actions: <Widget>[
-                FlatButton(onPressed: () {}, child: Text('Followers 2')),
-                FlatButton(onPressed: () {}, child: Text('Following 4')),
+                Follower(
+                    streamFunction: ProfileService(uid: user.uid).getFollower,
+                    type: 'Followers'),
+                Follower(
+                    streamFunction: ProfileService(uid: user.uid).getFollowing,
+                    type: 'Following')
               ],
             ),
             body: MyPost()));
