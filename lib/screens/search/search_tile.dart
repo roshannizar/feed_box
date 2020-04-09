@@ -57,17 +57,6 @@ class _SearchTileState extends State<SearchTile> {
                           titleDirection: true,
                           receiverUid: user.uid,
                           title: 'started following you'));
-                } else {
-                  await ProfileService(uid: user.uid).newActivity(ActivityModel(
-                      titleDirection: false,
-                      receiverUid: widget.profile.uid,
-                      title: 'You unfollowed'));
-
-                  await ProfileService(uid: widget.profile.uid).newActivity(
-                      ActivityModel(
-                          titleDirection: true,
-                          receiverUid: user.uid,
-                          title: 'started unfollowed you'));
                 }
 
                 setState(() {

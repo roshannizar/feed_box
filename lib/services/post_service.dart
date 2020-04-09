@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/models/like_model.dart';
 import 'package:feed_box/models/post_model.dart';
+import 'package:feed_box/services/profile_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
@@ -11,7 +13,7 @@ class PostService {
   final String uid;
   final CollectionReference postCollection =
       Firestore.instance.collection('post');
-      final CollectionReference profileCollection =
+  final CollectionReference profileCollection =
       Firestore.instance.collection('profile');
   final StorageReference firebaseStorage =
       FirebaseStorage.instance.ref().child('post');
@@ -55,8 +57,8 @@ class PostService {
     }
   }
 
-  Future newLike(
-      String profile, String docid, String likedocid, bool liked) async {
+  Future newLike(String profile, String docid, String likedocid, bool liked,
+      String ruid) async {
     if (liked) {
       await postCollection
           .document(docid)
@@ -73,6 +75,13 @@ class PostService {
           .add({'profile': profile}).catchError((e) {
         return e;
       });
+
+      if (ruid != null) {
+        await ProfileService(uid: ruid).newActivity(ActivityModel(
+            titleDirection: true,
+            title: 'liked your post',
+            receiverUid: profile));
+      }
     }
   }
 
@@ -88,7 +97,7 @@ class PostService {
   Future deletePost(String docid) async {
     return await postCollection.document(docid).delete().catchError((e) {
       print(e);
-    }); 
+    });
   }
 
   List<PostModel> _postsListCollection(QuerySnapshot snapshot) {
