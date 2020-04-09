@@ -14,7 +14,7 @@ class ProfileService {
       Firestore.instance.collection('profile');
 
   Future updateProfile(String fullname, String email) async {
-    return await profileCollection.document(uid).setData({
+    await profileCollection.document(uid).setData({
       'uid': uid,
       'fullname': fullname,
       'email': email,
@@ -22,12 +22,19 @@ class ProfileService {
     }).catchError((e) {
       print(e);
     });
+
+    await profileCollection
+        .document(uid)
+        .collection('following')
+        .add({'friendName': 'Roshan Nizar', 'friendUid': uid}).catchError((e) {
+      print(e);
+    });
   }
 
   Future newActivity(ActivityModel activityModel) async {
     return await profileCollection.document(uid).collection('activity').add({
       'uid': uid,
-      'titleDirection':activityModel.titleDirection,
+      'titleDirection': activityModel.titleDirection,
       'receiverUid': activityModel.receiverUid,
       'date':
           '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().toString().padLeft(2, '0')} ${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}',
