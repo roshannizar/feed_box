@@ -7,7 +7,6 @@ import 'package:feed_box/models/like_model.dart';
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/services/profile_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:intl/intl.dart';
 
 class PostService {
   final String uid;

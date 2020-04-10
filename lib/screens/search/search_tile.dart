@@ -42,9 +42,6 @@ class _SearchTileState extends State<SearchTile> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () async {
-                await ProfileService(uid: user.uid).newFollowing(
-                    FollowerListModel(friendUid: widget.profile.uid),
-                    following);
 
                 if (following) {
                   await ProfileService(uid: user.uid).newActivity(ActivityModel(
@@ -58,6 +55,12 @@ class _SearchTileState extends State<SearchTile> {
                           receiverUid: user.uid,
                           title: 'started following you'));
                 }
+
+                await ProfileService(uid: user.uid).newFollowing(
+                    FollowerListModel(friendUid: widget.profile.uid),
+                    following);
+
+                
 
                 setState(() {
                   following = !following;
