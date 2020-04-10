@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 class PushNotifcationService {
   final FirebaseMessaging _fcm = FirebaseMessaging();
 
+  //push notification
   Future initialise() async {
 
     _fcm.configure(
@@ -16,7 +17,7 @@ class PushNotifcationService {
         print('onMessage: $message');
       },
     );
- 
+    //permission request
     _fcm.requestNotificationPermissions(
       const IosNotificationSettings(
         sound: true,

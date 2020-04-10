@@ -23,8 +23,7 @@ class PostService {
   //new post
   Future newPost(
       String fullname, String description, File image, File video) async {
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat.yMd().add_jm().format(now);
+    String formattedDate = '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2,'0')}-${DateTime.now().day.toString().padLeft(2,'0')} ${DateTime.now().hour.toString().padLeft(2,'0')}:${DateTime.now().minute.toString().padLeft(2,'0')}';//eg 2020-04-09 16.00
 
     // checks whether iamge and video is null, if not post is added without any url firebase storage will be blocked
     if (video == null && image == null) { 
