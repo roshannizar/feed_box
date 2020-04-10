@@ -26,7 +26,8 @@ class PostService {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat.yMd().add_jm().format(now);
 
-    if (video == null) {
+    // checks whether iamge and video is null, if not post is added without any url firebase storage will be blocked
+    if (video == null && image == null) { 
       return await postCollection.add({
         'uid': uid,
         'fullname': fullname,
@@ -36,20 +37,22 @@ class PostService {
         print(e);
       });
     } else {
+
+      //this upload image and video to firebasestorage
       StorageUploadTask task = firebaseStorage
           .child(formattedDate)
           .putFile(video ?? image, StorageMetadata(contentType: 'video.mp4'));
 
       await (task.onComplete).then((s) async {
-        String url = await s.ref.getDownloadURL();
+        String url = await s.ref.getDownloadURL();//once upload is done url can be extracted
         return await postCollection.add({
           'uid': uid,
           'fullname': fullname,
           'description': description,
           'date': formattedDate,
-          'postUrl': url,
-          'video': video.toString(),
-          'image': image.toString()
+          'postUrl': url, //main firebase storage link 
+          'video': video.toString(),//path is stored
+          'image': image.toString() // path is stored
         }).catchError((e) {
           print(e);
         });
@@ -57,9 +60,10 @@ class PostService {
     }
   }
 
+  //like method
   Future newLike(String profile, String docid, String likedocid, bool liked,
       String ruid) async {
-    if (liked) {
+    if (liked) {//check whether the post is already liked
       await postCollection
           .document(docid)
           .collection('likes')
@@ -76,7 +80,7 @@ class PostService {
         return e;
       });
 
-      if (ruid != null) {
+      if (ruid != null) { //activity will be tracked when receiver id is null 
         await ProfileService(uid: ruid).newActivity(ActivityModel(
             titleDirection: true,
             title: 'liked your post',
@@ -85,6 +89,7 @@ class PostService {
     }
   }
 
+  //comments method
   Future newComments(String content, String profile, String docid) async {
     return await postCollection
         .document(docid)
@@ -94,12 +99,14 @@ class PostService {
     });
   }
 
+  //delete psot method
   Future deletePost(String docid) async {
     return await postCollection.document(docid).delete().catchError((e) {
       print(e);
     });
   }
-
+  
+  //post list mapping model method
   List<PostModel> _postsListCollection(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return PostModel(
@@ -114,6 +121,7 @@ class PostService {
     }).toList();
   }
 
+  //user list mapping model method
   List<PostModel> _userPost(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return PostModel(
@@ -128,6 +136,7 @@ class PostService {
     }).toList();
   }
 
+  //likes mapping model method
   List<LikeModel> _likes(QuerySnapshot snapshot) {
     return snapshot.documents.map((f) {
       return LikeModel(
@@ -135,6 +144,7 @@ class PostService {
     }).toList();
   }
 
+  //comments list mapping model method
   List<CommentModel> _comments(QuerySnapshot snapshot) {
     return snapshot.documents.map((f) {
       return CommentModel(
@@ -142,6 +152,7 @@ class PostService {
     }).toList();
   }
 
+  //stream method to listen all the post collection
   Stream<List<PostModel>> get posts {
     return postCollection
         .orderBy('date', descending: true)
@@ -149,6 +160,7 @@ class PostService {
         .map(_postsListCollection);
   }
 
+  //stream method to listen all the likes collection
   Stream<List<LikeModel>> get likes {
     return postCollection
         .document(uid)
@@ -157,6 +169,7 @@ class PostService {
         .map(_likes);
   }
 
+  //stream method to listen all the comment collection
   Stream<List<CommentModel>> get getComments {
     return postCollection
         .document(uid)
@@ -165,6 +178,7 @@ class PostService {
         .map(_comments);
   }
 
+  //stream method to listen all the my post collection
   Stream<List<PostModel>> get myPosts {
     return postCollection
         .where('uid', isEqualTo: uid)

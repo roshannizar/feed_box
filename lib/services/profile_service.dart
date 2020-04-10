@@ -5,6 +5,8 @@ import 'package:feed_box/models/profile_model.dart';
 
 class ProfileService {
   final String uid;
+
+  //default profile image
   String profileUrl =
       'https://firebasestorage.googleapis.com/v0/b/feed-box-c1336.appspot.com/o/profile%2Fblank-profile-picture-973460_640.png?alt=media&token=35274574-be73-4e51-a0c4-49ab435803d5';
 
@@ -13,6 +15,7 @@ class ProfileService {
   final CollectionReference profileCollection =
       Firestore.instance.collection('profile');
 
+  //update profile
   Future updateProfile(String fullname, String email) async {
     await profileCollection.document(uid).setData({
       'uid': uid,
@@ -23,6 +26,8 @@ class ProfileService {
       print(e);
     });
 
+    //add a default following method to get all your personal post,
+    //where your uid will be stored and will be easy to retreive the post
     await profileCollection
         .document(uid)
         .collection('following')
@@ -31,22 +36,26 @@ class ProfileService {
     });
   }
 
+  //activity tracking method
   Future newActivity(ActivityModel activityModel) async {
     return await profileCollection.document(uid).collection('activity').add({
       'uid': uid,
       'titleDirection': activityModel.titleDirection,
       'receiverUid': activityModel.receiverUid,
       'date':
-          '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().toString().padLeft(2, '0')} ${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}',
+          '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2,'0')}-${DateTime.now().day.toString().padLeft(2,'0')} ${DateTime.now().hour.toString().padLeft(2,'0')}:${DateTime.now().minute.toString().padLeft(2,'0')}', //eg: 2020-04-09 16.00
       'title': activityModel.title
     }).catchError((e) {
       print(e);
     });
   }
 
+  //new follwing method
   Future newFollowing(
       FollowerListModel followerListModel, bool following) async {
-    if (following) {
+    if (following) { //check already following
+
+      //update my profile following
       await profileCollection
           .document(uid)
           .collection('following')
@@ -56,6 +65,7 @@ class ProfileService {
         print(e);
       });
 
+      //update friend profile followers
       await profileCollection
           .document(followerListModel.friendUid)
           .collection('followers')
@@ -65,6 +75,8 @@ class ProfileService {
         print(e);
       });
     } else {
+
+      //update my profile following
       await profileCollection
           .document(uid)
           .collection('following')
@@ -76,6 +88,7 @@ class ProfileService {
         print(e);
       });
 
+      //update friend profile followers
       await profileCollection
           .document(followerListModel.friendUid)
           .collection('followers')
@@ -85,15 +98,7 @@ class ProfileService {
     }
   }
 
-  Future unFollowing(FollowerListModel followerListModel) async {
-    return await profileCollection.document(uid).collection('follower').add({
-      'friendName': followerListModel.friendName,
-      'friendUid': followerListModel.friendUid
-    }).catchError((e) {
-      print(e);
-    });
-  }
-
+  //profile data mapping model
   ProfileModel _profileData(DocumentSnapshot snapshot) {
     return ProfileModel(
         uid: uid,
@@ -102,6 +107,7 @@ class ProfileService {
         profileUrl: snapshot.data['profileUrl']);
   }
 
+  //activity list mapping model
   List<ActivityModel> _activityList(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return ActivityModel(
@@ -113,6 +119,7 @@ class ProfileService {
     }).toList();
   }
 
+  //profile list mapping model
   List<ProfileModel> _profileList(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return ProfileModel(
@@ -123,6 +130,7 @@ class ProfileService {
     }).toList();
   }
 
+  //follower list mapping model
   List<FollowerListModel> _follower(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return FollowerListModel(
@@ -132,6 +140,7 @@ class ProfileService {
     }).toList();
   }
 
+  //following list mapping model
   List<FollowerListModel> _following(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return FollowerListModel(
@@ -141,10 +150,12 @@ class ProfileService {
     }).toList();
   }
 
+  //stream method to retrieve Profile Model
   Stream<ProfileModel> get profileData {
     return profileCollection.document(uid).snapshots().map(_profileData);
   }
 
+  //stream method to retrieve Activity list Model
   Stream<List<ActivityModel>> get allActivity {
     return profileCollection
         .document(uid)
@@ -154,10 +165,12 @@ class ProfileService {
         .map(_activityList);
   }
 
+  //stream method to retrieve list profile model
   Stream<List<ProfileModel>> get allProfile {
     return profileCollection.snapshots().map(_profileList);
   }
 
+  //stream method to retrieve follower list model
   Stream<List<FollowerListModel>> get getFollower {
     return profileCollection
         .document(uid)
@@ -166,6 +179,7 @@ class ProfileService {
         .map(_follower);
   }
 
+  //stream method to retrieve following list model
   Stream<List<FollowerListModel>> get getFollowing {
     return profileCollection
         .document(uid)
