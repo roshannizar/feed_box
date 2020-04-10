@@ -43,7 +43,7 @@ class _SearchTileState extends State<SearchTile> {
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () async {
 
-                if (following) {
+                if (following==false) {
                   await ProfileService(uid: user.uid).newActivity(ActivityModel(
                       titleDirection: false,
                       receiverUid: widget.profile.uid,
