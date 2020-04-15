@@ -30,8 +30,8 @@ class _ProfileContainerState extends State<ProfileContainer> {
                 icon: Icon(Icons.exit_to_app),
               ),
               IconButton(
-                onPressed: () async {
-                  
+                onPressed: () {
+                  Navigator.pushNamed(context, '/editprofile');
                 },
                 icon: Icon(Icons.edit),
               )
