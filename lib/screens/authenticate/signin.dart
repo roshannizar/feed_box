@@ -31,6 +31,12 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
           ..repeat();
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   Animatable<Color> background = TweenSequence<Color>([
     TweenSequenceItem(
       weight: 1.0,
@@ -73,8 +79,8 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                             .evaluate(AlwaysStoppedAnimation(controller.value)),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Container(
                             child: Padding(
