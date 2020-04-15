@@ -15,7 +15,8 @@ class _FollowerTileState extends State<FollowerTile> {
     final followerCount = Provider.of<List<FollowerListModel>>(context) ?? [];
 
     return FlatButton(
-      child: Text('${widget.type} ${followerCount.length}'),
+      child: Text(
+          '${widget.type} ${widget.type == 'Following' ? followerCount.length - 1 : followerCount.length}'),
       onPressed: () {},
     );
   }
