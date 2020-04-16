@@ -166,7 +166,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                             children: <Widget>[
                                               FlatButton(
                                                 onPressed: () async {
-                                                  await login();
+                                                  login();
                                                 },
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius:
