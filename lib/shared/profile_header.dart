@@ -32,6 +32,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               return Text(widget.titleDirection
                   ? '${profileModel.fullname} ${widget.title}'
                   : '${widget.title} ${profileModel.fullname}');
+            } else if(widget.type == 'title'){
+              return Text('${profileModel.fullname}');
             } else {
               return CircleAvatar(
                   radius: 20,
