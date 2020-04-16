@@ -3,6 +3,8 @@ import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/shared/constant.dart';
 
+import 'alert.dart';
+
 class SignIn extends StatefulWidget {
   final Function toggleView;
   SignIn({this.toggleView});
@@ -37,6 +39,14 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
         });
       }
     }
+  }
+
+  void dialog() {
+    showDialog(
+        context: this.context,
+        builder: (BuildContext context) {
+          return Alert();
+        });
   }
 
   @override
@@ -178,10 +188,14 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                                     color: Colors.white,
                                                   ),
                                                 ),
-                                                color: Colors.lightBlueAccent,
+                                                color: background.evaluate(
+                                                    AlwaysStoppedAnimation(
+                                                        controller.value)),
                                               ),
                                               FlatButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  dialog();
+                                                },
                                                 child: Text('Forgot Password?'),
                                               )
                                             ],
