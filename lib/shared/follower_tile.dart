@@ -17,7 +17,9 @@ class _FollowerTileState extends State<FollowerTile> {
     return FlatButton(
       child: Text(
           '${widget.type} ${widget.type == 'Following' ? followerCount.length - 1 : followerCount.length}'),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, '/follower',arguments: widget.type);
+      },
     );
   }
 }
