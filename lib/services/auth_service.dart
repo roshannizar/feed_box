@@ -35,12 +35,19 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await ProfileService(uid: user.uid).updateProfile(fullname, email,'','',null,null);
+      await ProfileService(uid: user.uid)
+          .updateProfile(fullname, email, '', '', null, null);
       return _user(user);
     } catch (e) {
       print(e.toString());
       return null;
     }
+  }
+
+  Future resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email).catchError((e) {
+      return e;
+    });
   }
 
   //User Signout
