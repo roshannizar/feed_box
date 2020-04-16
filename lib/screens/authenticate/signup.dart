@@ -12,11 +12,10 @@ class SignUp extends StatefulWidget {
   _SignUpState createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
+class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   AnimationController controller;
-
 
   bool loading = false;
   String email = '';
@@ -62,46 +61,37 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
     return loading
         ? Loading()
         : AnimatedBuilder(
-          animation: controller,
-          builder: (context, child) {
-                  return Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: ListView(children: <Widget>[
-                SafeArea(
-                  child: Container(
+            animation: controller,
+            builder: (context, child) {
+              return SafeArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: Text('FeedBox Signup'),
+                    centerTitle: true,
+                    elevation: 0,
+                    backgroundColor: background.evaluate(
+                            AlwaysStoppedAnimation(controller.value)),
+                    leading: IconButton(
+                      onPressed: (){
+                        widget.toggleView();
+                      },
+                      icon: Icon(Icons.arrow_back),
+                    ),
+                  ),
+                  body: Container(
                     decoration: BoxDecoration(
-                        color: background.evaluate(AlwaysStoppedAnimation(controller.value))),
-                    child: Column(
+                        color: background.evaluate(
+                            AlwaysStoppedAnimation(controller.value))),
+                    child: ListView(
                       children: <Widget>[
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                        Container(
+                            padding: const EdgeInsets.only(top:25,bottom: 30),
                             child: SizedBox(
                               child: Image.asset('assets/communication.png'),
                               height: 80,
                             ),
-                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                          child: Center(
-                            child: ToggleSwitch(
-                              minWidth: 90.0,
-                              initialLabelIndex: 1,
-                              activeBgColor: Colors.lightBlueAccent,
-                              activeTextColor: Colors.white,
-                              inactiveBgColor: Colors.white,
-                              inactiveTextColor: Colors.black,
-                              labels: ['SignIn', 'SignUp'],
-                              onToggle: (index) {
-                                if (index == 0) {
-                                  widget.toggleView();
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        Padding(
+                        Container(
                           padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                           child: Row(
                             children: <Widget>[
@@ -122,8 +112,9 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                             validator: (val) => val.isEmpty
                                                 ? 'Enter Full Name'
                                                 : null,
-                                            decoration: textInputDecoration
-                                                .copyWith(hintText: 'Full Name'),
+                                            decoration:
+                                                textInputDecoration.copyWith(
+                                                    hintText: 'Full Name'),
                                             onChanged: (value) {
                                               setState(() {
                                                 fullname = value;
@@ -170,7 +161,8 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                             obscureText: true,
                                             decoration:
                                                 textInputDecoration.copyWith(
-                                                    hintText: 'Confirm Password'),
+                                                    hintText:
+                                                        'Confirm Password'),
                                           ),
                                           SizedBox(height: 20),
                                           Row(
@@ -179,7 +171,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: <Widget>[
-                                              RaisedButton(
+                                              FlatButton(
                                                 onPressed: () async {
                                                   if (_formKey.currentState
                                                       .validate()) {
@@ -188,14 +180,16 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                                     });
 
                                                     dynamic result =
-                                                        await _authService.signup(
-                                                            email,
-                                                            password,
-                                                            fullname);
+                                                        await _authService
+                                                            .signup(
+                                                                email,
+                                                                password,
+                                                                fullname);
 
                                                     if (result == null) {
                                                       setState(() {
-                                                        error = 'Invalid details';
+                                                        error =
+                                                            'Invalid details';
                                                         loading = false;
                                                       });
                                                     }
@@ -203,8 +197,8 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                                 },
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                        new BorderRadius.circular(
-                                                            10)),
+                                                        new BorderRadius
+                                                            .circular(10)),
                                                 child: Text(
                                                   'Sign Up',
                                                   style: TextStyle(
@@ -230,9 +224,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                     ),
                   ),
                 ),
-              ]),
-            );
-          }
-        );
+              );
+            });
   }
 }
