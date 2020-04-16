@@ -44,6 +44,7 @@ class AuthService {
     }
   }
 
+  //reset password
   Future resetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email).catchError((e) {
       return e;
