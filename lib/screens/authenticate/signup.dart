@@ -2,7 +2,6 @@ import 'package:feed_box/services/auth_service.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:feed_box/shared/constant.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class SignUp extends StatefulWidget {
   final Function toggleView;
