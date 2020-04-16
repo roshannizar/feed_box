@@ -60,8 +60,8 @@ class _AlertState extends State<Alert> {
                           context: this.context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Success'),
-                              content: Text('Check your mail address'),
+                              title: Text('Error'),
+                              content: Text('Something went wrong, maybe wrong email!'),
                             );
                           });
                       Navigator.pop(context);
