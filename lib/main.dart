@@ -1,5 +1,6 @@
 import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:feed_box/screens/profile/edit_profile.dart';
+import 'package:feed_box/screens/profile/followers/follower.dart';
 import 'package:feed_box/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => Wrapper(),
             '/newpost': (context) => BottomPanel(),
-            '/editprofile':(context) => EditProfile()
+            '/editprofile':(context) => EditProfile(),
+            '/follower':(context) => Follower()
           },
         ));
   }
