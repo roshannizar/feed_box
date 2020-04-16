@@ -104,7 +104,7 @@ class _AuthenticateState extends State<Authenticate>
                                 style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                             SizedBox(height: 20),
                             Text(
-                                'Now you can like, comment and share the post'),
+                                'Now you can like, comment and share your post'),
                             SizedBox(height: 30),
                             Wrap(
                               children: <Widget>[
