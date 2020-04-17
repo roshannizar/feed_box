@@ -28,26 +28,29 @@ class _ProfileContainerState extends State<ProfileContainer> {
                   await AuthService().signOut();
                 },
                 icon: Icon(Icons.exit_to_app),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/editprofile');
-                },
-                icon: Icon(Icons.edit),
               )
             ],
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               background: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/maxresdefault.jpg'),fit: BoxFit.cover)
-                ),
-                    child:CircleAvatar(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/card.jpg'),
+                          fit: BoxFit.cover)),
+                  child: CircleAvatar(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/editprofile');
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                      ),
                       radius: 50,
-                        backgroundImage:
-                            NetworkImage('${widget.profile.profileUrl}'))
-              ),
+                      backgroundImage:
+                          NetworkImage('${widget.profile.profileUrl}'))),
               title: Text('${widget.profile.fullname}'),
             ),
           )
