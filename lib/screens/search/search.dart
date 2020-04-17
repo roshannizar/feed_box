@@ -19,24 +19,7 @@ class _SearchState extends State<Search> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: Form(
-              child: TextFormField(
-                decoration: textInputDecoration.copyWith(
-                    hintText: 'Search Feed, Person ...',
-                    fillColor: Colors.grey[100],
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    hintStyle: TextStyle(color: Colors.black)),
-              ),
-            ),
-            actions: <Widget>[
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.cancel,color: Colors.black,),
-              )
-            ],
+            title: Text('All Users',style: TextStyle(color: Colors.black))
           ),
           body: SearchList(),
         ),
