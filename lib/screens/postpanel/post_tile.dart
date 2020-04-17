@@ -37,13 +37,13 @@ class _PostTileState extends State<PostTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
+                    Container(
                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: Text('${widget.myPost.fullname}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
-                    Padding(
+                    Container(
                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: Text(
                         '${widget.myPost.date}',
@@ -52,17 +52,21 @@ class _PostTileState extends State<PostTile> {
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: () async {
-                      await PostService().deletePost(widget.myPost.documentId);
-                      await ProfileService(uid: widget.myPost.uid).newActivity(ActivityModel(title: 'You have delete a post',uid: widget.myPost.uid));
-                      
-                      setState(() {
-                        
-                      });
-                    },
-                    icon: Icon(Icons.delete)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit))
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                        onPressed: () async {
+                          await PostService().deletePost(widget.myPost.documentId);
+                          await ProfileService(uid: widget.myPost.uid).newActivity(ActivityModel(title: 'You have delete a post',uid: widget.myPost.uid));
+                          
+                          setState(() {
+                            
+                          });
+                        },
+                        icon: Icon(Icons.delete)),
+                  ),
+                ),
               ],
             ),
             Container(
