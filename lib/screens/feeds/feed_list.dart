@@ -1,5 +1,6 @@
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:feed_box/models/post_model.dart';
+import 'package:feed_box/shared/empty.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,26 +40,8 @@ class _FeedListState extends State<FeedList> {
     feedList.toSet().toList();
     }
 
-    return posts.length == 0
-        ? Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset('assets/empty-inbox.png', width: 200),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'You have not posted anything!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
-              ),
-            ),
-          )
+    return feedList.length == 0
+        ? Empty(imageUrl: 'assets/empty-inbox.png',text: 'Start following someone to view their post',)
         : ListView.builder(
             shrinkWrap: true,
             itemCount: 
