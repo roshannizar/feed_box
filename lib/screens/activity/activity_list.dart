@@ -1,4 +1,5 @@
 import 'package:feed_box/models/activity_model.dart';
+import 'package:feed_box/shared/empty.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +16,7 @@ class _ActivityListState extends State<ActivityList> {
     final activityList = Provider.of<List<ActivityModel>>(context) ?? [];
 
     return activityList.length == 0
-        ? Container(
-            alignment: Alignment.center,
-            child: Text('No activity has been tracked now'),
-          )
+        ? Empty(imageUrl: 'assets/activation.png',text: 'No activity has been tracked now',)
         : ListView.separated(
             shrinkWrap: true,
             itemCount: activityList.length,
