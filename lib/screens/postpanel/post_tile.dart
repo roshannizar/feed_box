@@ -58,7 +58,7 @@ class _PostTileState extends State<PostTile> {
                     child: IconButton(
                         onPressed: () async {
                           await PostService().deletePost(widget.myPost.documentId);
-                          await ProfileService(uid: widget.myPost.uid).newActivity(ActivityModel(title: 'You have delete a post',uid: widget.myPost.uid));
+                          await ProfileService(uid: widget.myPost.uid).newActivity(ActivityModel(title: 'You have delete a post',uid: widget.myPost.uid,receiverUid: widget.myPost.uid));
                           
                           setState(() {
                             
