@@ -16,6 +16,7 @@ class SearchTile extends StatefulWidget {
 
 class _SearchTileState extends State<SearchTile> {
   bool following = false;
+  bool loading = false;
   String followerId;
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,10 @@ class _SearchTileState extends State<SearchTile> {
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () async {
 
+                setState(() {
+                  loading=true;
+                });
+
                 if (following==false) {
                   await ProfileService(uid: user.uid).newActivity(ActivityModel(
                       titleDirection: false,
@@ -64,11 +69,12 @@ class _SearchTileState extends State<SearchTile> {
 
                 setState(() {
                   following = !following;
+                  loading=false;
                 });
               },
-              icon: Icon(following ? Icons.check : Icons.add,
+              icon: loading?Icon(Icons.watch_later,color: following ? Colors.blue : Colors.white):Icon(following ? Icons.check : Icons.add,
                   color: following ? Colors.blue : Colors.white),
-              label: Text(following ? 'Following' : 'Follow',
+              label: loading? Text('loading',style: TextStyle(color:following ? Colors.blue : Colors.white)):Text(following ? 'Following' : 'Follow',
                   style: TextStyle(
                       color: following ? Colors.blue : Colors.white))),
         ),
