@@ -1,3 +1,7 @@
+/*
+ * Search list
+ */
+
 import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/shared/loading.dart';
