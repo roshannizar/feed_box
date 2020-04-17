@@ -25,7 +25,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
             actions: <Widget>[
               IconButton(
                 onPressed: () async {
-                  await AuthService().signOut();
+                  await AuthService().signOut(); // profile signout
                 },
                 icon: Icon(Icons.exit_to_app),
               )
@@ -56,7 +56,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
           )
         ];
       },
-      body: PostPanel(),
+      body: PostPanel(), // post panel component
     ));
   }
 }

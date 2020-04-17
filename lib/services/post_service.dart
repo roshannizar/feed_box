@@ -97,7 +97,7 @@ class PostService {
     });
   }
 
-  //delete psot method
+  //delete post method
   Future deletePost(String docid) async {
     return await postCollection.document(docid).delete().catchError((e) {
       print(e);

@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.black));
+        SystemUiOverlayStyle(statusBarColor: Colors.black)); // status bar color
     return StreamProvider<UserModel>.value(
         value: AuthService().user,
         child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
+          debugShowCheckedModeBanner: false, //banner check
+          initialRoute: '/', //initial route loading
           routes: {
             '/': (context) => Wrapper(),
             '/newpost': (context) => BottomPanel(),

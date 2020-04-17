@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'follower_tile.dart';
 
 class Follower extends StatefulWidget {
-  final Stream<List<FollowerListModel>> streamFunction;
-  final String type;
+  final Stream<List<FollowerListModel>> streamFunction; // stream function has been passed using shared function
+  final String type; //eg: Follower or Following
   Follower({this.streamFunction, this.type});
   @override
   _FollowerState createState() => _FollowerState();

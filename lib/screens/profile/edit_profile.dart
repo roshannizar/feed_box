@@ -1,3 +1,7 @@
+/*
+Edit Profile dart file
+*/
+
 import 'package:flutter/material.dart';
 
 import 'edit_tile.dart';
@@ -17,9 +21,9 @@ class _EditProfileState extends State<EditProfile> {
         backgroundColor: Colors.white,
       ),
       body: Container(
-        padding: const EdgeInsets.fromLTRB(10,10,10,0),
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: ListView(
-          children: <Widget>[EditTile()],
+          children: <Widget>[EditTile()], // edit work on edit tile
         ),
       ),
     );

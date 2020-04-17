@@ -13,8 +13,8 @@ class SearchList extends StatefulWidget {
 class _SearchListState extends State<SearchList> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModel>(context);
-    final profiles = Provider.of<List<ProfileModel>>(context) ?? [];
+    final user = Provider.of<UserModel>(context); // current user uid
+    final profiles = Provider.of<List<ProfileModel>>(context) ?? []; //all profiles details
 
     return profiles.length == 0
         ? Loading()
@@ -22,10 +22,10 @@ class _SearchListState extends State<SearchList> {
             shrinkWrap: true,
             itemCount: profiles.length,
             itemBuilder: (context, index) {
-              if (profiles[index].uid == user.uid) {
+              if (profiles[index].uid == user.uid) { //checks the user type, if current user provide null with a box
                 return SizedBox(height: 0, width: 0);
               } else {
-                return SearchTile(profile: profiles[index]);
+                return SearchTile(profile: profiles[index]); //tile
               }
             },
           );

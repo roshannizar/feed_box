@@ -1,3 +1,7 @@
+/*
+  Edit profile tile
+*/
+
 import 'dart:io';
 
 import 'package:feed_box/models/profile_model.dart';
@@ -42,6 +46,7 @@ class _EditTileState extends State<EditTile> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (change == false) {
+                  //only works when the change is false , this is to avoid reloading of data
                   ProfileModel profile = snapshot.data;
                   fullname = profile.fullname;
                   email = profile.email;
@@ -56,7 +61,8 @@ class _EditTileState extends State<EditTile> {
                     children: <Widget>[
                       CircleAvatar(
                         radius: 100,
-                        backgroundImage: imageUrl == null
+                        backgroundImage: imageUrl ==
+                                null //checks wether the image is edited if edited takes from file or network
                             ? NetworkImage(image)
                             : FileImage(imageUrl),
                         child: IconButton(
@@ -143,6 +149,7 @@ class _EditTileState extends State<EditTile> {
                         child: FlatButton(
                           onPressed: () async {
                             if (_formkey.currentState.validate()) {
+                              //checks whether there is change in the form
                               setState(() {
                                 loading = true;
                               });

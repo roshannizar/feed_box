@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatefulWidget {
-  final String profile, content, type, title;
-  final bool titleDirection;
+  final String profile, content, type, title; // takes a parameter since its using shared class
+  final bool titleDirection; // checks whether current user
   ProfileHeader(
-      {this.profile, this.content, this.type, this.title, this.titleDirection});
+      {this.profile, this.content, this.type, this.title, this.titleDirection}); //initializing parameter
   @override
   _ProfileHeaderState createState() => _ProfileHeaderState();
 }
@@ -16,7 +16,7 @@ class ProfileHeader extends StatefulWidget {
 class _ProfileHeaderState extends State<ProfileHeader> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModel>(context);
+    final user = Provider.of<UserModel>(context); //current user uid loaded
 
     return StreamBuilder<ProfileModel>(
         stream: ProfileService(uid: widget.profile).profileData,
@@ -24,7 +24,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           if (snapshot.hasData) {
             ProfileModel profileModel = snapshot.data;
 
-            if (widget.type == 'Comments') {
+            if (widget.type == 'Comments') { // check the type of parameter screen
               return ListTile(
                 leading: CircleAvatar(
                     backgroundImage:
@@ -32,12 +32,12 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 title: Text('${profileModel.fullname}'),
                 subtitle: Text('${widget.content}'),
               );
-            } else if (widget.type == 'activity') {
+            } else if (widget.type == 'activity') { // check the type of parameter screen
               return widget.profile == user.uid
                   ? Text("${widget.title}")
                   : Text(widget.titleDirection
                       ? '${profileModel.fullname} ${widget.title}'
-                      : '${widget.title} ${profileModel.fullname}');
+                      : '${widget.title} ${profileModel.fullname}'); // this works according to the activity to be shown
             } else if (widget.type == 'title') {
               return Text('${profileModel.fullname}');
             } else {
@@ -46,7 +46,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   backgroundImage: NetworkImage('${profileModel.profileUrl}'));
             }
           } else {
-            return Container();
+            return Container(); // no values return  default value
           }
         });
   }

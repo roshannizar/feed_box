@@ -23,6 +23,7 @@ class _SearchTileState extends State<SearchTile> {
     final user = Provider.of<UserModel>(context);
     final followerList = Provider.of<List<FollowerListModel>>(context) ?? [];
 
+    //disable current user detail whether he is following the particular person
     followerList.forEach((f) {
       if (f.friendUid == widget.profile.uid) {
         following = true;
@@ -48,6 +49,7 @@ class _SearchTileState extends State<SearchTile> {
                   loading=true;
                 });
 
+                //setting acitvity first 
                 if (following==false) {
                   await ProfileService(uid: user.uid).newActivity(ActivityModel(
                       titleDirection: false,
@@ -61,6 +63,7 @@ class _SearchTileState extends State<SearchTile> {
                           title: 'started following you'));
                 }
 
+                //updating follower and following
                 await ProfileService(uid: user.uid).newFollowing(
                     FollowerListModel(friendUid: widget.profile.uid),
                     following);
@@ -72,6 +75,8 @@ class _SearchTileState extends State<SearchTile> {
                   loading=false;
                 });
               },
+
+              //Icons and Text work according to the colors and text when following and loading is true/false
               icon: loading?Icon(Icons.watch_later,color: following ? Colors.blue : Colors.white):Icon(following ? Icons.check : Icons.add,
                   color: following ? Colors.blue : Colors.white),
               label: loading? Text('loading',style: TextStyle(color:following ? Colors.blue : Colors.white)):Text(following ? 'Following' : 'Follow',

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Empty extends StatefulWidget {
-  final String imageUrl;
-  final String text;
+  final String imageUrl; //takes image url for different screens
+  final String text; // text to appear
   Empty({this.imageUrl, this.text});
   @override
   _EmptyState createState() => _EmptyState();

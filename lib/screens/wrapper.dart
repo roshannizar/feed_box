@@ -11,6 +11,6 @@ class Wrapper extends StatelessWidget {
 
     final user = Provider.of<UserModel>(context);
 
-    return user != null ? Home(): Authenticate();
+    return user != null ? Home(): Authenticate(); // main screen to check whether user has logged in 
   }
 }

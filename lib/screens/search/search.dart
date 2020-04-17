@@ -2,7 +2,6 @@ import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/screens/search/search_list.dart';
 import 'package:feed_box/services/profile_service.dart';
 import 'package:flutter/material.dart';
-import 'package:feed_box/shared/constant.dart';
 import 'package:provider/provider.dart';
 
 class Search extends StatefulWidget {

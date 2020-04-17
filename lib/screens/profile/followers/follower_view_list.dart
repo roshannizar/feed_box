@@ -1,3 +1,7 @@
+/*
+Follower list file where all the follower will be loaded based onther parameter
+*/ 
+
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/shared/loading.dart';
