@@ -19,9 +19,10 @@ class _BottomPanelState extends State<BottomPanel> {
   final _formkey = GlobalKey<FormState>();
 
   bool isProgress = false;
+  bool change = false;
   String fullname = '';
   String description;
-  File image,video;
+  File image, video;
 
   Future getVideo() async {
     var holdVideo = await ImagePicker.pickVideo(source: ImageSource.gallery);
@@ -56,98 +57,108 @@ class _BottomPanelState extends State<BottomPanel> {
             return Scaffold(
               appBar: AppBar(
                 iconTheme: IconThemeData(color: Colors.black),
-                title: Text('New Post',style: TextStyle(color: Colors.black)),
+                title: Text('New Post', style: TextStyle(color: Colors.black)),
                 backgroundColor: Colors.white,
                 actions: <Widget>[
                   FlatButton.icon(
-                              onPressed: () async {
-                                if (_formkey.currentState.validate()) {
-                                  setState(() {
-                                    isProgress = true;
-                                    fullname = profileData.fullname;
-                                  });
-                                  await PostService(uid: user.uid)
-                                      .newPost(fullname, description, image, video);
+                    onPressed: () async {
+                      if (_formkey.currentState.validate()) {
+                        setState(() {
+                          isProgress = true;
+                          fullname = profileData.fullname;
+                        });
+                        await PostService(uid: user.uid)
+                            .newPost(fullname, description, image, video);
 
-                                  setState(() {
-                                    isProgress = false;
-                                  });
-                                  Navigator.pop(context);
-                                }
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0)),
-                              color: Colors.blueAccent,
-                              label: Text('Post',
-                                  style: TextStyle(color: Colors.white)),
-                              icon: Icon(
-                                Icons.done,
-                                color: Colors.white,
-                              ),
-                            )
+                        setState(() {
+                          isProgress = false;
+                        });
+                        Navigator.pop(context);
+                      }
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0)),
+                    color: change ? Colors.blueAccent : Colors.grey,
+                    label: Text('Post', style: TextStyle(color: Colors.white)),
+                    icon: Icon(
+                      Icons.done,
+                      color: Colors.white,
+                    ),
+                  )
                 ],
               ),
-              body: Container(
-                  child: Column(
-                children: <Widget>[
-                  isProgress
-                      ? LinearProgressIndicator(value: null)
-                      : SizedBox(
-                          height: 0,
-                        ),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: Form(
-                        key: _formkey,
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage('${profileData.profileUrl}'),
-                              ),
-                              title: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                child: TextFormField(
-                                  onChanged: (val) =>
-                                      setState(() => description = val),
-                                  validator: (val) => val.isEmpty
-                                      ? 'Share something, field is blank'
-                                      : null,
-                                  decoration: textInputDecoration.copyWith(
-                                    fillColor: Colors.white,
-                                      hintText: 'Share your thoughts...'),
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: 10,
+              body: ListView(children: <Widget>[
+                Container(
+                    child: Column(
+                  children: <Widget>[
+                    isProgress
+                        ? LinearProgressIndicator(value: null)
+                        : SizedBox(
+                            height: 0,
+                          ),
+                    Container(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: Form(
+                          key: _formkey,
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage('${profileData.profileUrl}'),
+                                ),
+                                title: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  child: TextFormField(
+                                    onChanged: (val) {
+                                      setState(() {
+                                        description = val;
+                                        change = true;
+                                      });
+                                    },
+                                    validator: (val) => val.isEmpty
+                                        ? 'Share something, field is blank'
+                                        : null,
+                                    decoration: textInputDecoration.copyWith(
+                                        fillColor: Colors.white,
+                                        hintText: 'Share your thoughts...'),
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 10,
+                                  ),
+                                ),
+                                subtitle: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                      onPressed: () async {
+                                        await getImage();
+                                      },
+                                      icon: Icon(image == null
+                                          ? Icons.perm_media
+                                          : Icons.done),
+                                    ),
+                                    IconButton(
+                                      onPressed: () async {
+                                        await getVideo();
+                                      },
+                                      icon: Icon(video == null
+                                          ? Icons.video_call
+                                          : Icons.done),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              subtitle: Row(
-                                children: <Widget>[
-                                  IconButton(
-                                    onPressed: () async {
-                                      await getImage();
-                                    },
-                                    icon: Icon(image == null
-                                        ? Icons.perm_media
-                                        : Icons.done),
-                                  ),
-                                  IconButton(
-                                    onPressed: () async {
-                                      await getVideo();
-                                    },
-                                    icon: Icon(video == null
-                                        ? Icons.video_call
-                                        : Icons.done),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ))
-                ],
-              )),
+                            ],
+                          ),
+                        )),
+                    image != null
+                        ? Container(
+                            child: Image.file(image),
+                          )
+                        : Container()
+                  ],
+                )),
+              ]),
             );
           }
         });
