@@ -1,4 +1,5 @@
 import 'package:feed_box/models/post_model.dart';
+import 'package:feed_box/shared/empty.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:feed_box/screens/postpanel/post_tile.dart';
@@ -14,24 +15,9 @@ class _MyPostState extends State<MyPost> {
     final myPosts = Provider.of<List<PostModel>>(context) ?? [];
 
     return myPosts.isEmpty
-        ? Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset('assets/empty-inbox.png', width: 200),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'You have not posted anything!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
-              ),
-            ),
+        ? Empty(
+            imageUrl: 'assets/empty-inbox.png',
+            text: 'Your post is empty',
           )
         : ListView.builder(
             itemCount: myPosts.length,
