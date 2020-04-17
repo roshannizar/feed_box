@@ -1,3 +1,7 @@
+/*
+  Contains profile view tiles with backend connected
+*/
+
 import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/screens/postpanel/post_panel.dart';
 import 'package:feed_box/services/auth_service.dart';

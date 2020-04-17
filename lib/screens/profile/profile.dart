@@ -1,3 +1,7 @@
+/**
+ * Profile Data Container
+ */
+
 import 'package:feed_box/models/profile_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/services/profile_service.dart';
