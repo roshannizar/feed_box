@@ -1,3 +1,8 @@
+/**
+ * Activity main class importing Activitylist class
+ * This class uses StreamProvider to load all the activity
+ */
+
 import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/activity/activity_list.dart';

@@ -1,3 +1,7 @@
+/**
+ * My Post rendering class with listview builder
+ */
+
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/shared/empty.dart';
 import 'package:flutter/material.dart';

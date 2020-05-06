@@ -1,3 +1,7 @@
+/**
+ * signup class using animation back color tween
+ */
+
 import 'package:feed_box/services/auth_service.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +35,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
           ..repeat();
   }
 
+  //color tween
   Animatable<Color> background = TweenSequence<Color>([
     TweenSequenceItem(
       weight: 1.0,

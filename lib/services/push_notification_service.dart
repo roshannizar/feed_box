@@ -1,3 +1,7 @@
+/**
+ * Push notification service class
+ */
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class PushNotifcationService {

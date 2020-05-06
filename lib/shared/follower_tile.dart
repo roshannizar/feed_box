@@ -1,3 +1,7 @@
+/**
+ * Follower tile class
+ */
+
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

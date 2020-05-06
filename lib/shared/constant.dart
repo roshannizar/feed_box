@@ -1,3 +1,7 @@
+/**
+ * Constant class 
+ */
+
 import 'package:flutter/material.dart';
 
 //constant field text

@@ -1,3 +1,7 @@
+/**
+ * Alert box using to popup forgot password port
+ */
+
 import 'package:feed_box/services/auth_service.dart';
 import 'package:feed_box/shared/constant.dart';
 import 'package:flutter/material.dart';

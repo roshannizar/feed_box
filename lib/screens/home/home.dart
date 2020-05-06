@@ -1,3 +1,8 @@
+/**
+ * Main home dashboard
+ * Bottom navigator is used with push notification
+ */
+
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/feeds/feed.dart';

@@ -1,5 +1,5 @@
 /*
-Follower list file where all the follower will be loaded based onther parameter
+Follower list file where all the follower will be loaded based on the parameter
 */ 
 
 import 'package:feed_box/models/follower_list_model.dart';

@@ -1,3 +1,8 @@
+/**
+ * Streamprovider to listen user post
+ * Rendering follower and following Appbar
+ */
+
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/postpanel/my_post.dart';

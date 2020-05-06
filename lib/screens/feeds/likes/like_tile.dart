@@ -1,3 +1,7 @@
+/**
+ * like tile, this like checks the like list from the current user
+ */
+
 import 'package:feed_box/models/like_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/services/post_service.dart';
@@ -21,6 +25,7 @@ class _LikeTileState extends State<LikeTile> {
     final user = Provider.of<UserModel>(context);
     final likesList = Provider.of<List<LikeModel>>(context) ?? [];
 
+    //Likes current user interation
     likesList.forEach((f) {
       if (f.profile == user.uid) {
         liked = true;

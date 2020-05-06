@@ -1,3 +1,7 @@
+/*
+  Imported liketile all the backend is connected with the like tile
+*/
+
 import 'package:feed_box/models/like_model.dart';
 import 'package:feed_box/screens/feeds/likes/like_tile.dart';
 import 'package:feed_box/services/post_service.dart';
@@ -13,6 +17,8 @@ class Likes extends StatefulWidget {
 }
 
 class _LikesState extends State<Likes> {
+
+  //StreamProvider with likeModel
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<LikeModel>>.value(

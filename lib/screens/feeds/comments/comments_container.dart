@@ -1,3 +1,8 @@
+/**
+ * Comments container loading all tthe comments of respective post
+ * Comments listview
+ */
+
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments_container_list.dart';

@@ -1,3 +1,7 @@
+/**
+ * Image loader with loading indicator progress
+ */
+
 import 'package:flutter/material.dart';
 
 class FeedImage extends StatelessWidget {

@@ -1,3 +1,7 @@
+/**
+ * Video controller class loading the video from the initstate
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:video_player/video_player.dart';
@@ -10,11 +14,14 @@ class FeedPlayer extends StatefulWidget {
 }
 
 class _FeedPlayerState extends State<FeedPlayer> {
+  //videoplayer initializer
   VideoPlayerController _controller;
+
 
   @override
   void initState() {
     super.initState();
+    //intializing video to the controller
     _controller = VideoPlayerController.network('${widget.url}')
       ..initialize().then((_) {
         setState(() {});
@@ -23,6 +30,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
 
   @override
   void dispose() {
+    //disposing the video controller as soon the screen is closed
     _controller.dispose();
 
     super.dispose();

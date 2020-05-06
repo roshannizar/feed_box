@@ -1,3 +1,8 @@
+/**
+ * Comments container tile to view profile header, 
+ * profile header is located in the shared folder
+ */
+
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';

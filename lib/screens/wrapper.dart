@@ -1,3 +1,8 @@
+/**
+ * Wrapper class to laod signin on auth using UserModel provider
+ * checks whether the user is loggedin or not
+ */
+
 import 'package:feed_box/models/user_model.dart';
 import 'package:feed_box/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';

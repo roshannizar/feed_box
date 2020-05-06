@@ -1,3 +1,7 @@
+/**
+ * Feed Component rendering class, known as FeedTile
+ */
+
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/screens/feeds/components/feed_image.dart';
 import 'package:feed_box/shared/profile_header.dart';

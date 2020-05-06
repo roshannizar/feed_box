@@ -1,3 +1,9 @@
+/**
+ * Post panel rendering class, moved to screen from bottomsheet
+ * all the changes appears here
+ * user can post image, video
+ */
+
 import 'dart:io';
 
 import 'package:feed_box/models/profile_model.dart';
@@ -24,21 +30,23 @@ class _BottomPanelState extends State<BottomPanel> {
   String description;
   File image, video;
 
+  //getVideo method
   Future getVideo() async {
     var holdVideo = await ImagePicker.pickVideo(source: ImageSource.gallery);
 
     setState(() {
       video = holdVideo;
-      image = null;
+      image = null; //makes the image null, only one file per post
     });
   }
 
+  //getImage method
   Future getImage() async {
     var holdImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       image = holdImage;
-      video = null;
+      video = null; //makes the video null, only one file per post
     });
   }
 

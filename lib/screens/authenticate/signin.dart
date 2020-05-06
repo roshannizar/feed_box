@@ -1,3 +1,7 @@
+/**
+ * Signin class using animation back color tween
+ */
+
 import 'package:feed_box/services/auth_service.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +19,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
   final AuthService _authService = AuthService();
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //checks the form state
 
   bool loading = false;
   String email = '';
@@ -24,6 +28,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
 
   AnimationController controller;
 
+  //signin function using async
   void login() async {
     if (_formKey.currentState.validate()) {
       setState(() {
@@ -63,6 +68,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  //color tween
   Animatable<Color> background = TweenSequence<Color>([
     TweenSequenceItem(
       weight: 1.0,

@@ -1,3 +1,7 @@
+/**
+ * Activity list component rendering class
+ */
+
 import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/shared/profile_header.dart';
 import 'package:flutter/material.dart';

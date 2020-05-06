@@ -1,3 +1,7 @@
+/**
+ * Comments rendering component by importing bottomsheet
+ */
+
 import 'package:feed_box/models/comments_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

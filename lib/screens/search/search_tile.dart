@@ -1,3 +1,7 @@
+/**
+ * Search tile rendering the image and name of the user profile using shared class
+ */
+
 import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/models/follower_list_model.dart';
 import 'package:feed_box/models/profile_model.dart';
@@ -44,13 +48,12 @@ class _SearchTileState extends State<SearchTile> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () async {
-
                 setState(() {
-                  loading=true;
+                  loading = true;
                 });
 
-                //setting acitvity first 
-                if (following==false) {
+                //setting acitvity first
+                if (following == false) {
                   await ProfileService(uid: user.uid).newActivity(ActivityModel(
                       titleDirection: false,
                       receiverUid: widget.profile.uid,
@@ -68,20 +71,25 @@ class _SearchTileState extends State<SearchTile> {
                     FollowerListModel(friendUid: widget.profile.uid),
                     following);
 
-                
-
                 setState(() {
                   following = !following;
-                  loading=false;
+                  loading = false;
                 });
               },
 
               //Icons and Text work according to the colors and text when following and loading is true/false
-              icon: loading?Icon(Icons.watch_later,color: following ? Colors.blue : Colors.white):Icon(following ? Icons.check : Icons.add,
-                  color: following ? Colors.blue : Colors.white),
-              label: loading? Text('loading',style: TextStyle(color:following ? Colors.blue : Colors.white)):Text(following ? 'Following' : 'Follow',
-                  style: TextStyle(
-                      color: following ? Colors.blue : Colors.white))),
+              icon: loading
+                  ? Icon(Icons.watch_later,
+                      color: following ? Colors.blue : Colors.white)
+                  : Icon(following ? Icons.check : Icons.add,
+                      color: following ? Colors.blue : Colors.white),
+              label: loading
+                  ? Text('loading',
+                      style: TextStyle(
+                          color: following ? Colors.blue : Colors.white))
+                  : Text(following ? 'Following' : 'Follow',
+                      style: TextStyle(
+                          color: following ? Colors.blue : Colors.white))),
         ),
       ),
     );

@@ -1,3 +1,7 @@
+/**
+ * This is the authentication class loading background and front rendering of those signin and signup buttons
+ */
+
 import 'package:feed_box/screens/authenticate/signin.dart';
 import 'package:feed_box/screens/authenticate/signup.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +24,7 @@ class _AuthenticateState extends State<Authenticate>
           ..repeat();
   }
 
+  //toggles to show whether to render
   void toggleView() {
     setState(() {
       showSignIn = 'auth';
@@ -32,6 +37,7 @@ class _AuthenticateState extends State<Authenticate>
     super.dispose();
   }
 
+  //color tween
   Animatable<Color> background = TweenSequence<Color>([
     TweenSequenceItem(
       weight: 1.0,

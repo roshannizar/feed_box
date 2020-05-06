@@ -1,3 +1,7 @@
+/**
+ * Post tile rendering class with Iamge and Video loader 
+ */
+
 import 'package:feed_box/models/activity_model.dart';
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments.dart';
@@ -73,6 +77,7 @@ class _PostTileState extends State<PostTile> {
               padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
               child: Text('${widget.myPost.description}'),
             ),
+            //checking user image or video is null
             (widget.myPost.image != "null" && widget.myPost.image != "")
                 ? FeedImage(url:widget.myPost.postUrl)
                 : (widget.myPost.video != '' && widget.myPost.video != 'null')

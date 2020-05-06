@@ -1,3 +1,7 @@
+/**
+ * comments list container view with listview builder
+ */
+
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/shared/loading.dart';
 import 'package:flutter/material.dart';

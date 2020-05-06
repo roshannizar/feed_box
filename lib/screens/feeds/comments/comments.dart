@@ -1,3 +1,7 @@
+/**
+ * Comments class streaming commentModel using users post comments
+ */
+
 import 'package:feed_box/models/comments_model.dart';
 import 'package:feed_box/screens/feeds/comments/comments_tile.dart';
 import 'package:feed_box/services/post_service.dart';

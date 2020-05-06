@@ -1,3 +1,7 @@
+/**
+ * Empty rendering class
+ */
+
 import 'package:flutter/material.dart';
 
 class Empty extends StatefulWidget {

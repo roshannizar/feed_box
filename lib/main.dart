@@ -1,3 +1,7 @@
+/**
+ * Main dart class rendering all the screen with router
+ */
+
 import 'package:feed_box/screens/postpanel/bottom_panel.dart';
 import 'package:feed_box/screens/profile/edit_profile.dart';
 import 'package:feed_box/screens/profile/followers/follower.dart';

@@ -1,3 +1,7 @@
+/**
+ * Feed Main class rendering the main list output
+ */
+
 import 'package:feed_box/models/post_model.dart';
 import 'package:feed_box/services/post_service.dart';
 import 'package:flutter/material.dart';
